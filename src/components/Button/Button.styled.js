@@ -3,10 +3,13 @@ import styled, { css } from 'styled-components/macro';
 const COLOR_SUFFIX = 'Light';
 
 const cssButton = css`
+  display: flex;
   margin: 10px;
   box-sizing: border-box;
   padding: 10px 50px;
   border-radius: 5px;
+  width: fit-content;
+  height: fit-content;
   font-size: ${({ theme }) => theme.fontSize.pM};
   font-weight: ${({ theme }) => theme.fontWeight.medium};
   transition: all ease 0.3s;

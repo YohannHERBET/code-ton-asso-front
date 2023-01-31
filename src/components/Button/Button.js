@@ -26,13 +26,14 @@ const Button = (props) => {
     startIcon,
     endIcon,
     label,
+    onClick,
     variant = buttonEnum.fill,
   } = props;
 
   const StyledButton = getRightButton(variant);
 
   return (
-    <StyledButton className={className} $color={color}>
+    <StyledButton className={className} $color={color} onClick={onClick}>
       {startIcon}
       {label}
       {endIcon}
@@ -46,6 +47,7 @@ Button.propTypes = {
   startIcon: PropTypes.node,
   endIcon: PropTypes.node,
   label: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
   variant: PropTypes.string,
 };
 

@@ -2,10 +2,11 @@ const theme = {
   color: {
     primary: '#2F9387',
     secondary: '#9C6315',
-    danger: '#932F2F',
+    tertiary: '#932F2F',
     primaryLight: '#ABDFD6',
     secondaryLight: '#D9BA9E',
-    dangerLight: '#DFABAB',
+    tertiaryLight: '#DFABAB',
+    error: '#F08080',
     white: '#ffffff',
     black: '#000000',
     grey75: '#4F4F4F',

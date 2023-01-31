@@ -1,7 +1,7 @@
 const buttonColorEnum = {
   primary: 'primary',
   secondary: 'secondary',
-  danger: 'danger',
+  tertiary: 'tertiary',
 };
 
 export default buttonColorEnum;
