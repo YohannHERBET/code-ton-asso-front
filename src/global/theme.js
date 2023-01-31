@@ -2,10 +2,10 @@ const theme = {
   color: {
     primary: '#2F9387',
     secondary: '#9C6315',
-    error: '#932F2F',
+    danger: '#932F2F',
     primaryLight: '#ABDFD6',
     secondaryLight: '#D9BA9E',
-    errorLight: '#DFABAB',
+    dangerLight: '#DFABAB',
     white: '#ffffff',
     black: '#000000',
     grey75: '#4F4F4F',
@@ -28,8 +28,8 @@ const theme = {
     pS: '0.875rem',
   },
   fontWeight: {
-    regular: '200',
-    light: '400',
+    light: '200',
+    regular: '400',
     medium: '500',
     semiBold: '600',
     bold: '700',
