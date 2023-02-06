@@ -5,6 +5,8 @@ import Input from '../../components/Input/Input';
 import buttonColorEnum from '../../global/enums/buttonColorEnum';
 import buttonEnum from '../../global/enums/buttonEnum';
 import Select from '../../components/Select/Select';
+import RegistrationCard from '../../components/RegistrationCard/RegistrationCard';
+import image from '../../assets/association-registration.png';
 
 const Home = () => {
   const [select, setSelect] = useState();
@@ -63,6 +65,11 @@ const Home = () => {
           { label: 'solo', value: 'solo' },
           { label: 'duo', value: 'duo' },
         ]}
+      />
+      <RegistrationCard
+        slug="/login"
+        image={image}
+        text="Je suis une association"
       />
     </StyledHome>
   );
