@@ -21,13 +21,14 @@ const Card = (props) => {
     description,
     slug,
     imageUrl,
+    className,
     type = cardTypeEnum.project,
   } = props;
 
   const StyledIcon = cardTypeMatcher[type];
 
   return (
-    <StyledCard>
+    <StyledCard className={className}>
       <StyledLink to={slug}>
         {imageUrl ? (
           <StyledImage src={imageUrl} />
@@ -47,6 +48,7 @@ const Card = (props) => {
 };
 
 Card.propTypes = {
+  className: PropTypes.string,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   type: PropTypes.string,

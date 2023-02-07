@@ -78,7 +78,7 @@ export const StyledDeveloperIcon = styled(DeveloperIcon)`
 
 export const StyledTitle = styled(Title)`
   margin-bottom: 7px;
-  font-size: ${({ theme }) => theme.fontSize.titleS};
+  font-size: ${({ theme }) => theme.fontSize.titleXS};
 `;
 
 export const StyledText = styled.p`

@@ -2,6 +2,7 @@ import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 import breakpoints from '../../global/breakpoints';
 import { ReactComponent as ArrowIcon } from '../../assets/arrow-card.svg';
+import Title from '../Title/Title';
 
 export const StyledContainerRegistrationCard = styled(Link)`
   box-shadow: 0px 0px 10px 0px ${({ theme }) => theme.color.grey50};
@@ -13,14 +14,12 @@ export const StyledContainerRegistrationCard = styled(Link)`
   background-position: center;
   position: relative;
   transition: all 0.3s ease;
-  outline: 3px solid transparent;
   @media ${breakpoints.laptopL} {
     width: 27rem;
     height: 27rem;
     box-shadow: 0px 0px 15px 0px ${({ theme }) => theme.color.grey50};
   }
   &:hover {
-    outline: 3px solid ${({ theme }) => theme.color.primary};
     circle {
       fill: ${({ theme }) => theme.color.primary};
     }
@@ -56,16 +55,18 @@ export const StyledArrowRegistrationCard = styled(ArrowIcon)`
   }
 `;
 
-export const StyledtextRegistrationCard = styled.p`
+export const StyledTitle = styled(Title)`
   position: absolute;
   bottom: 30%;
   text-align: center;
   width: 100%;
   padding: 0 10px;
+  text-shadow: 1px 1px 1px ${({ theme }) => theme.color.grey50};
   font-size: ${({ theme }) => theme.fontSize.titleS};
   font-weight: ${({ theme }) => theme.fontWeight.medium};
   font-family: ${({ theme }) => theme.fontFamily.text};
   @media ${breakpoints.laptopL} {
-    font-size: ${({ theme }) => theme.fontSize.titleXL};
+    font-size: ${({ theme }) => theme.fontSize.titleXL};  
+    text-shadow: 2px 2px 1px ${({ theme }) => theme.color.grey50};
   }
 `;

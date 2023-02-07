@@ -2,10 +2,11 @@ import PropTypes from 'prop-types';
 import {
   StyledContainerRegistrationCard,
   StyledArrowRegistrationCard,
-  StyledtextRegistrationCard,
+  StyledTitle,
 } from './RegistrationCard.styled';
+import titleEnum from '../../global/enums/titleEnum';
 
-const Title = (props) => {
+const RegistrationCard = (props) => {
   const { className, image, text, slug } = props;
   return (
     <StyledContainerRegistrationCard
@@ -13,17 +14,17 @@ const Title = (props) => {
       className={className}
       image={image}
     >
-      <StyledtextRegistrationCard>{text}</StyledtextRegistrationCard>
+      <StyledTitle variant={titleEnum.h2} content={text} />
       <StyledArrowRegistrationCard />
     </StyledContainerRegistrationCard>
   );
 };
 
-Title.propTypes = {
+RegistrationCard.propTypes = {
   className: PropTypes.string,
   image: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
 };
 
-export default Title;
+export default RegistrationCard;

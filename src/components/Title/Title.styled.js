@@ -27,7 +27,7 @@ export const h2 = styled.h2`
 
 export const h3 = styled.h3`
   font-family: ${({ theme }) => theme.fontFamily.title};
-  font-size: ${({ theme }) => theme.fontSize.titleS};
+  font-size: ${({ theme }) => theme.fontSize.titleXS};
   font-weight: ${({ theme }) => theme.fontWeight.medium};
   @media ${breakpoints.mobileL} {
     font-size: ${({ theme }) => theme.fontSize.titleM};
@@ -42,7 +42,7 @@ export const h4 = styled.h4`
   font-size: ${({ theme }) => theme.fontSize.pL};
   font-weight: ${({ theme }) => theme.fontWeight.medium};
   @media ${breakpoints.mobileL} {
-    font-size: ${({ theme }) => theme.fontSize.titleS};
+    font-size: ${({ theme }) => theme.fontSize.titleXS};
   }
   @media ${breakpoints.tablet} {
     font-size: ${({ theme }) => theme.fontSize.titleM};
