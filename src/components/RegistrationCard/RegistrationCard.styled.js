@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 import breakpoints from '../../global/breakpoints';
-import { ReactComponent as ReactLogo } from '../../assets/arrow-card.svg';
+import { ReactComponent as ArrowIcon } from '../../assets/arrow-card.svg';
 
 export const StyledContainerRegistrationCard = styled(Link)`
   box-shadow: 0px 0px 10px 0px ${({ theme }) => theme.color.grey50};
@@ -11,7 +11,6 @@ export const StyledContainerRegistrationCard = styled(Link)`
   background-image: url(${(props) => props.image});
   background-size: cover;
   background-position: center;
-  margin: 0 auto;
   position: relative;
   transition: all 0.3s ease;
   outline: 3px solid transparent;
@@ -44,7 +43,7 @@ export const StyledContainerRegistrationCard = styled(Link)`
   }
 `;
 
-export const StyledArrowRegistrationCard = styled(ReactLogo)`
+export const StyledArrowRegistrationCard = styled(ArrowIcon)`
   position: absolute;
   bottom: 17px;
   right: 16px;

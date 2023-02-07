@@ -1,6 +1,5 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 export const StyledLayout = styled.div`
-  width: 100vw;
-  min-height: 100vh;
+  min-width: 100%;
 `;

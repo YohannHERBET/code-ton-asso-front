@@ -7,6 +7,8 @@ import buttonEnum from '../../global/enums/buttonEnum';
 import Select from '../../components/Select/Select';
 import RegistrationCard from '../../components/RegistrationCard/RegistrationCard';
 import image from '../../assets/association-registration.png';
+import Card from '../../components/Card/Card';
+import cardTypeEnum from '../../global/enums/cardTypeEnum';
 
 const Home = () => {
   const [select, setSelect] = useState();
@@ -70,6 +72,30 @@ const Home = () => {
         slug="/login"
         image={image}
         text="Je suis une association"
+      />
+      <Card
+        title="Test titre"
+        slug="/article"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis turpis suscipit, facilisis justo vitae, lobortis turpis. Quisque mauris urna, feugiat at ipsum ac, lacinia dictum lectus. Sed finibus urna gravida facilisis sollicitudin. Cras pretium gravida justo quis dignissim. Aliquam at varius massa. Ut quis nisi varius"
+      />
+      <Card
+        title="Test titre"
+        slug="/article"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis turpis suscipit, facilisis justo vitae, lobortis turpis. Quisque mauris urna, feugiat at ipsum ac, lacinia dictum lectus. Sed finibus urna gravida facilisis sollicitudin. Cras pretium gravida justo quis dignissim. Aliquam at varius massa. Ut quis nisi varius"
+        type={cardTypeEnum.association}
+      />
+      <Card
+        title="Test titre"
+        slug="/article"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis turpis suscipit, facilisis justo vitae, lobortis turpis. Quisque mauris urna, feugiat at ipsum ac, lacinia dictum lectus. Sed finibus urna gravida facilisis sollicitudin. Cras pretium gravida justo quis dignissim. Aliquam at varius massa. Ut quis nisi varius"
+        type={cardTypeEnum.developer}
+      />
+      <Card
+        title="Test titre"
+        slug="/article"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis turpis suscipit, facilisis justo vitae, lobortis turpis. Quisque mauris urna, feugiat at ipsum ac, lacinia dictum lectus. Sed finibus urna gravida facilisis sollicitudin. Cras pretium gravida justo quis dignissim. Aliquam at varius massa. Ut quis nisi varius"
+        type={cardTypeEnum.developer}
+        imageUrl="https://www.pagesjaunes.fr/media/ugc/croix_rouge_francaise_03523800_201833550"
       />
     </StyledHome>
   );
