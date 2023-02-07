@@ -9,16 +9,36 @@ import RegistrationCard from '../../components/RegistrationCard/RegistrationCard
 import image from '../../assets/association-registration.png';
 import Card from '../../components/Card/Card';
 import cardTypeEnum from '../../global/enums/cardTypeEnum';
+import Tag from '../../components/Tag/Tag';
 
 const Home = () => {
-  const [select, setSelect] = useState();
-
-  const handleSetSelect = (event) => {
-    setSelect(event.target.value);
-  };
-
+  const options = [
+    { value: 'one', label: 'One' },
+    { value: 'two', label: 'Two' },
+  ];
+  const options2 = [
+    {
+      value: 'Se crer un compte utilisateur',
+      label: 'Se crer un compte utilisateur',
+    },
+    {
+      value: 'Se connecter/se déconnecter',
+      label: 'Se connecter/se déconnecter',
+    },
+    {
+      value: 'Une barre de recherche',
+      label: 'Une barre de recherche',
+    },
+    {
+      value: 'Une carte',
+      label: 'Une carte',
+    },
+  ];
+  const [select, setSelect] = useState({});
+  const [select2, setSelect2] = useState([]);
   return (
     <StyledHome>
+      <Tag text="frontend" secondary />
       <Button label="Button" onClick={() => console.log('test input')} />
       <Button label="Button" color={buttonColorEnum.secondary} />
       <Button label="Button" color={buttonColorEnum.tertiary} />
@@ -57,16 +77,23 @@ const Home = () => {
         value=""
         onChange={() => console.log('test input')}
         label="Titre de votre projet"
-        name="titleProject"
+        name="titleProject2"
         placeholder="Application mobile pour cuisine"
       />
       <Select
         value={select}
-        onChange={handleSetSelect}
-        options={[
-          { label: 'solo', value: 'solo' },
-          { label: 'duo', value: 'duo' },
-        ]}
+        onChange={(event) => setSelect(event)}
+        options={options}
+        label="Label du Select simple"
+      />
+      <Select
+        value={select2}
+        onChange={(event2) => setSelect2(event2)}
+        options={options2}
+        isMulti
+        required
+        label="Label du Select à choix multiple"
+        error="le champ est requis !"
       />
       <RegistrationCard
         slug="/login"
@@ -100,5 +127,4 @@ const Home = () => {
     </StyledHome>
   );
 };
-
 export default Home;

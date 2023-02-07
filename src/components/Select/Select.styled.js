@@ -15,14 +15,27 @@ export const StyledSelect = styled(Select)`
     border-color: ${({ theme }) => theme.color.secondary};
     box-shadow: 0 0 0 1px ${({ theme }) => theme.color.secondary};
   }
-  .select__value-container {
-  }
-  .select__input-container {
-  }
-  .select__placeholder {
-  }
 `;
 
-export const StyledContainerSelect = styled.div``;
+export const StyledContainerSelect = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
-export const StyledError = styled.span``;
+export const StyledError = styled.span`
+  padding: 5px 0 0 0;
+  color: ${({ theme }) => theme.color.error};
+  font-size: ${({ theme }) => theme.fontSize.pS};
+  font-weight: ${({ theme }) => theme.fontWeight.medium};
+`;
+
+export const StyledRequired = styled.span`
+  color: ${({ theme }) => theme.color.error};
+`;
+
+export const StyledLabel = styled.label`
+  padding: 0 20px 10px 0;
+  color: ${({ theme }) => theme.color.secondary};
+  font-size: ${({ theme }) => theme.fontSize.pM};
+  font-weight: ${({ theme }) => theme.fontWeight.medium};
+`;
