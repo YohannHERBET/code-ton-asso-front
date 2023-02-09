@@ -1,15 +1,15 @@
 const navigation = [
   {
     path: '/projets',
-    title: 'Tous les projets',
+    title: 'Les projets',
   },
   {
     path: '/associations',
-    title: 'Toutes les associations',
+    title: 'Les associations',
   },
   {
     path: '/developpeurs',
-    title: 'Tous les développeurs',
+    title: 'Les développeurs',
   },
 ];
 
