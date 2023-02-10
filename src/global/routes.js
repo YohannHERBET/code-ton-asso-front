@@ -2,6 +2,7 @@ import Association from '../pages/Association/Association';
 import Home from '../pages/Home/Home';
 import Error404 from '../pages/Error404/Error404';
 import Exemple from '../pages/Exemple/Exemple';
+import Connection from '../pages/Connection/Connection';
 
 const routes = [
   {
@@ -10,9 +11,9 @@ const routes = [
     title: 'home',
   },
   {
-    path: 'association',
+    path: 'associations',
     element: <Association />,
-    title: 'association',
+    title: 'associations',
   },
   {
     element: <Error404 />,
@@ -22,6 +23,11 @@ const routes = [
     path: 'exemple',
     element: <Exemple />,
     title: 'exemple',
+  },
+  {
+    path: 'connexion',
+    element: <Connection />,
+    title: 'connexion',
   },
 ];
 
