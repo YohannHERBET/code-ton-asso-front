@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import navigation from '../../global/navigation';
 import logo from '../../assets/logo.svg';
 import close from '../../assets/close.svg';
@@ -10,6 +9,7 @@ import buttonEnum from '../../global/enums/buttonEnum';
 import {
   StyledContainer,
   StyledImage,
+  StyledLink,
   StyledMenu,
   StyledMenuItem,
   StyledMenuLink,
@@ -26,19 +26,19 @@ import {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
   const isLogged = true;
 
   return (
     <StyledContainer>
       <StyledContainerLeft>
-        <StyledLogo
-          src={logo}
-          onClick={() => {
-            navigate('/');
-            setIsOpen(false);
-          }}
-        />
+        <StyledLink to="/">
+          <StyledLogo
+            src={logo}
+            onClick={() => {
+              setIsOpen(false);
+            }}
+          />
+        </StyledLink>
         <StyledMenu isOpen={isOpen}>
           {navigation.map((link) => (
             <StyledMenuItem key={link.title}>
@@ -48,28 +48,51 @@ const Navbar = () => {
             </StyledMenuItem>
           ))}
           {isLogged ? (
-            <StyledButtonMobile label="Me déconnecter" variant={buttonEnum.none} onClick={() => setIsOpen(false)} />
+            <StyledButtonMobile
+              label="Me déconnecter"
+              variant={buttonEnum.none}
+              onClick={() => setIsOpen(false)}
+            />
           ) : (
             <>
-              <StyledButtonConnectionMobile label="Me connecter" variant={buttonEnum.none} onClick={() => navigate('/connexion')} />
-              <StyledButtonMobile label="M'inscrire" variant={buttonEnum.none} onClick={() => navigate('/inscription')} />
+              <StyledButtonConnectionMobile
+                label="Me connecter"
+                variant={buttonEnum.none}
+                to="/connexion"
+              />
+              <StyledButtonMobile
+                label="M'inscrire"
+                variant={buttonEnum.none}
+                to="/inscription"
+              />
             </>
           )}
         </StyledMenu>
       </StyledContainerLeft>
       <StyledContainerRight>
-        {isLogged && <StyledProfil src={profil} onClick={() => setIsOpen(false)} />}
+        {isLogged && (
+          <StyledLink to="/profil">
+            <StyledProfil src={profil} onClick={() => setIsOpen(false)} />
+          </StyledLink>
+        )}
         {isOpen ? (
           <StyledImage src={close} onClick={() => setIsOpen(!isOpen)} />
         ) : (
           <StyledImage src={burger} onClick={() => setIsOpen(!isOpen)} />
         )}
         {isLogged ? (
-          <StyledButton label="Me déconnecter" onClick={() => console.log('me déconnecter')} />
+          <StyledButton
+            label="Me déconnecter"
+            onClick={() => console.log('me déconnecter')}
+          />
         ) : (
           <StyledButtonContainer>
-            <StyledButton label="Me connecter" onClick={() => navigate('/connexion')} />
-            <StyledSignup label="M'inscrire" variant={buttonEnum.outline} onClick={() => navigate('/inscription')} />
+            <StyledButton label="Me connecter" to="/connexion" />
+            <StyledSignup
+              label="M'inscrire"
+              variant={buttonEnum.outline}
+              to="/inscription"
+            />
           </StyledButtonContainer>
         )}
       </StyledContainerRight>

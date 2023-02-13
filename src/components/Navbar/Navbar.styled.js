@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import breakpoints from '../../global/breakpoints';
 import Button from '../Button/Button';
 
@@ -12,17 +12,17 @@ const cssFirstButton = css`
 `;
 
 const cssSecondButton = css`
-    display: none;
-    @media ${breakpoints.tablet} {
-      display: flex;
-      padding: 5px 6px;
-      font-size: 13px;
-      width: max-content;
-    }
-    @media ${breakpoints.laptop} {
-      font-size: 15px;
-      padding: 5px 10px;
-    }
+  display: none;
+  @media ${breakpoints.tablet} {
+    display: flex;
+    padding: 5px 6px;
+    font-size: 13px;
+    width: max-content;
+  }
+  @media ${breakpoints.laptop} {
+    font-size: 15px;
+    padding: 5px 10px;
+  }
 `;
 
 export const StyledContainer = styled.nav`
@@ -38,6 +38,7 @@ export const StyledContainer = styled.nav`
 export const StyledImage = styled.img`
   margin: 0;
   font-size: 22px;
+  cursor: pointer;
   @media ${breakpoints.tablet} {
     display: none;
   }
@@ -57,7 +58,7 @@ export const StyledLogo = styled.img`
   }
 `;
 
-export const StyledMenu = styled.ul`  
+export const StyledMenu = styled.ul`
   display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
   list-style: none;
   margin: 0;
@@ -97,7 +98,19 @@ export const StyledMenuItem = styled.li`
   }
 `;
 
-export const StyledMenuLink = styled(NavLink)``;
+export const StyledMenuLink = styled(NavLink)`
+  color: ${({ theme }) => theme.color.white};
+  &:hover {
+    color: ${({ theme }) => theme.color.white};
+  }
+  transition: 0.1s all ease;
+  @media ${breakpoints.tablet} {
+    color: ${({ theme }) => theme.color.black};
+    &:hover {
+      color: ${({ theme }) => theme.color.primary};
+    }
+  }
+`;
 
 export const StyledContainerLeft = styled.div`
   display: flex;
@@ -129,4 +142,9 @@ export const StyledSignup = styled(Button)`
 
 export const StyledButtonContainer = styled.div`
   display: flex;
+`;
+
+export const StyledLink = styled(Link)`
+  display: flex;
+  align-items: center;
 `;

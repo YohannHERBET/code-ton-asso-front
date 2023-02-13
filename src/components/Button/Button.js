@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import {
   StyledPrimaryButton,
@@ -27,18 +28,29 @@ const Button = (props) => {
     endIcon,
     label,
     onClick,
+    to,
     variant = buttonEnum.fill,
   } = props;
 
   const StyledButton = getRightButton(variant);
 
-  return (
+  const button = to ? (
+    <Link to={to}>
+      <StyledButton className={className} $color={color} onClick={onClick}>
+        {startIcon}
+        {label}
+        {endIcon}
+      </StyledButton>
+    </Link>
+  ) : (
     <StyledButton className={className} $color={color} onClick={onClick}>
       {startIcon}
       {label}
       {endIcon}
     </StyledButton>
   );
+
+  return button;
 };
 
 Button.propTypes = {
@@ -49,6 +61,7 @@ Button.propTypes = {
   label: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   variant: PropTypes.string,
+  to: PropTypes.string,
 };
 
 export default Button;
