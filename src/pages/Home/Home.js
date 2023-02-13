@@ -1,18 +1,21 @@
-import titleEnum from '../../global/enums/titleEnum';
 import {
   StyledHome,
   StyledSubTitle,
   StyledTitle,
-  StyledParagraph,
   StyledSlider,
   StyledInfos,
+  StyledCard,
+  StyledCardMore,
+  StyledSection,
+  StyledSliderTitle,
 } from './Home.styled';
-import Card from '../../components/Card/Card';
-import cardTypeEnum from '../../global/enums/cardTypeEnum';
 
-const PROJECT_SLUG = '/projet';
-const ASSOCIATION_SLUG = '/association';
-const DEVELOPER_SLUG = '/developpeur';
+import cardTypeEnum from '../../global/enums/cardTypeEnum';
+import titleEnum from '../../global/enums/titleEnum';
+
+const PROJECT_SLUG = '/projets';
+const ASSOCIATION_SLUG = '/associations';
+const DEVELOPER_SLUG = '/developpeurs';
 
 const projectData = [
   {
@@ -39,7 +42,7 @@ const Home = () => {
   const projects = projectData?.slice(0, 3).map((project) => {
     const { title, description, slug, imageUrl } = project;
     return (
-      <Card
+      <StyledCard
         title={title}
         description={description}
         slug={`${PROJECT_SLUG}/${slug}`}
@@ -52,7 +55,7 @@ const Home = () => {
   const associations = projectData?.slice(0, 3).map((association) => {
     const { title, description, slug, imageUrl } = association;
     return (
-      <Card
+      <StyledCard
         title={title}
         description={description}
         slug={`${ASSOCIATION_SLUG}/${slug}`}
@@ -65,7 +68,7 @@ const Home = () => {
   const developers = projectData?.slice(0, 3).map((project) => {
     const { title, description, slug, imageUrl } = project;
     return (
-      <Card
+      <StyledCard
         title={title}
         description={description}
         slug={`${DEVELOPER_SLUG}/${slug}`}
@@ -79,15 +82,50 @@ const Home = () => {
     <StyledHome>
       <StyledInfos>
         <StyledTitle content="Code Ton Asso" variant={titleEnum.h1} />
-        <StyledSubTitle content="Sous Titre" variant={titleEnum.h2} />
-        <StyledParagraph>
+        <StyledSubTitle>
           La plateforme de mise en relation entre les associations et les
           développeurs
-        </StyledParagraph>
+        </StyledSubTitle>
       </StyledInfos>
-      <StyledSlider>{projects}</StyledSlider>
-      <StyledSlider>{associations}</StyledSlider>
-      <StyledSlider>{developers}</StyledSlider>
+
+      <StyledSection>
+        <StyledSliderTitle
+          content="Les derniers projets"
+          variant={titleEnum.h2}
+        />
+        <StyledSlider>
+          {projects}
+          <StyledCardMore title="Voir tout les projets" slug={PROJECT_SLUG} />
+        </StyledSlider>
+      </StyledSection>
+
+      <StyledSection>
+        <StyledSliderTitle
+          content="Les dernières associations"
+          variant={titleEnum.h2}
+        />
+        <StyledSlider>
+          {associations}
+          <StyledCardMore
+            title="Voir toutes les associations"
+            slug={ASSOCIATION_SLUG}
+          />
+        </StyledSlider>
+      </StyledSection>
+
+      <StyledSection>
+        <StyledSliderTitle
+          content="Les derniers développeurs"
+          variant={titleEnum.h2}
+        />
+        <StyledSlider>
+          {developers}
+          <StyledCardMore
+            title="Voir tout les développeurs"
+            slug={DEVELOPER_SLUG}
+          />
+        </StyledSlider>
+      </StyledSection>
     </StyledHome>
   );
 };
