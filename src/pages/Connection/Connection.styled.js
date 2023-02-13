@@ -5,7 +5,7 @@ import Button from '../../components/Button/Button';
 import breakpoints from '../../global/breakpoints';
 
 export const StyledConnectionContainer = styled.div`
-  margin: 5vh auto;
+  margin: 5em auto;
   padding: 2rem 1rem;
   width: 90%;
   border-radius: 5px;
@@ -15,12 +15,12 @@ export const StyledConnectionContainer = styled.div`
     width: 70%;
   }
   @media ${breakpoints.laptop} {
-    padding: 2rem 5rem;
+    padding: 3rem 5rem;
     width: 50%;
-    margin: 8vh auto;
+    margin: 8em auto;
   }
   @media ${breakpoints.laptopL} {
-    padding: 2rem 10rem;
+    padding: 3rem 10rem;
     width: 800px;
   }
 `;
