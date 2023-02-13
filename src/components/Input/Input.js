@@ -10,6 +10,7 @@ import {
 
 const Input = ({
   className,
+  classNameInput,
   error,
   name,
   label,
@@ -17,7 +18,7 @@ const Input = ({
   type,
   required,
 }) => (
-  <StyledContainerInput>
+  <StyledContainerInput className={className}>
     <StyledLabel htmlFor={name}>
       {label}
       {required && <StyledRequired>*</StyledRequired>}
@@ -27,7 +28,7 @@ const Input = ({
       type={type}
       id={name}
       name={name}
-      className={className}
+      className={classNameInput}
       placeholder={placeholder}
       required={required}
     />
@@ -37,6 +38,7 @@ const Input = ({
 
 Input.propTypes = {
   className: PropTypes.string,
+  classNameInput: PropTypes.string,
   error: PropTypes.string,
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
