@@ -5,6 +5,7 @@ import { ReactComponent as ArrowIcon } from '../../assets/arrow-card.svg';
 import Title from '../Title/Title';
 
 export const StyledContainerRegistrationCard = styled(Link)`
+  display: flex;
   box-shadow: 0px 0px 10px 0px ${({ theme }) => theme.color.grey50};
   border-radius: 5px;
   width: 17rem;
@@ -66,7 +67,7 @@ export const StyledTitle = styled(Title)`
   font-weight: ${({ theme }) => theme.fontWeight.medium};
   font-family: ${({ theme }) => theme.fontFamily.text};
   @media ${breakpoints.laptopL} {
-    font-size: ${({ theme }) => theme.fontSize.titleXL};  
+    font-size: ${({ theme }) => theme.fontSize.titleXL};
     text-shadow: 2px 2px 1px ${({ theme }) => theme.color.grey50};
   }
 `;
