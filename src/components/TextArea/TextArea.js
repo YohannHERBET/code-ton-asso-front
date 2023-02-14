@@ -1,56 +1,53 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import PropTypes from 'prop-types';
 import {
-  StyledContainerInput,
+  StyledContainerTextArea,
   StyledError,
-  StyledInput,
+  StyledTextArea,
   StyledLabel,
   StyledRequired,
-} from './Input.styled';
+} from './TextArea.styled';
 
-const Input = ({
+const TextArea = ({
   className,
-  classNameInput,
+  classNameTextArea,
   error,
   name,
   label,
-  placeholder,
-  type,
   onChange,
   value,
+  placeholder,
   required,
 }) => (
-  <StyledContainerInput className={className}>
+  <StyledContainerTextArea className={className}>
     <StyledLabel htmlFor={name}>
       {label}
       {required && <StyledRequired>*</StyledRequired>}
     </StyledLabel>
-    <StyledInput
+    <StyledTextArea
       error={error}
-      type={type}
       id={name}
       name={name}
-      onChange={onChange}
+      onChange={(e) => onChange(e, 'textarea')}
       value={value}
-      className={classNameInput}
+      className={classNameTextArea}
       placeholder={placeholder}
       required={required}
     />
     <StyledError>{error}</StyledError>
-  </StyledContainerInput>
+  </StyledContainerTextArea>
 );
 
-Input.propTypes = {
+TextArea.propTypes = {
   className: PropTypes.string,
-  classNameInput: PropTypes.string,
+  classNameTextArea: PropTypes.string,
   error: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
-  type: PropTypes.string,
   required: PropTypes.bool,
 };
 
-export default Input;
+export default TextArea;

@@ -3,6 +3,7 @@ import Error404 from '../pages/Error404/Error404';
 import Exemple from '../pages/Exemple/Exemple';
 import Connection from '../pages/Connection/Connection';
 import RegistrationChoice from '../pages/Registration/RegistrationChoice/RegistrationChoice';
+import AssociationRegistration from '../pages/Registration/AssociationRegistration/AssociationRegistration';
 import List from '../templates/List/List';
 import cardTypeEnum from './enums/cardTypeEnum';
 
@@ -63,6 +64,11 @@ const routes = [
     path: 'inscription',
     element: <RegistrationChoice />,
     title: 'inscription',
+  },
+  {
+    path: 'inscription/association',
+    element: <AssociationRegistration />,
+    title: 'inscription association',
   },
 ];
 
