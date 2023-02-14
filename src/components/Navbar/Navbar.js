@@ -26,7 +26,7 @@ import {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const isLogged = true;
+  const isLogged = false;
 
   return (
     <StyledContainer>

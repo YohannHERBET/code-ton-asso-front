@@ -79,6 +79,13 @@ export const StyledDeveloperIcon = styled(DeveloperIcon)`
 export const StyledTitle = styled(Title)`
   margin-bottom: 7px;
   font-size: ${({ theme }) => theme.fontSize.titleXS};
+  line-height: 1.75rem;
+  width: 85%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 export const StyledText = styled.p`

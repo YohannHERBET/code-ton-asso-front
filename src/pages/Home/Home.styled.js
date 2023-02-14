@@ -81,7 +81,7 @@ const cardCss = css`
     min-width: 370px;
   }
   @media ${breakpoints.laptopL} {
-    min-width: initial;
+    min-width: 410px;
     flex: 1;
   }
 `;
