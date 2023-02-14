@@ -39,9 +39,11 @@ const Exemple = () => {
   const [select, setSelect] = useState({});
   const [select2, setSelect2] = useState([]);
   return (
-
     <StyledExemple>
-      <Title variant={titleEnum.h1} content="le titre de cette merde" />
+      <Title variant={titleEnum.h1} content="Titre 1" />
+      <Title variant={titleEnum.h2} content="Titre 2" />
+      <Title variant={titleEnum.h3} content="Titre 3" />
+      <Title variant={titleEnum.h4} content="Titre 4" />
       <Tag text="frontend" />
       <Tag text="backend" secondary />
       <Button label="Button" onClick={() => console.log('test input')} />
