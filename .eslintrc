@@ -11,6 +11,7 @@
     "browser": true
   },
   "rules": {
+    "import/no-unresolved": [2, { "caseSensitive": false }],
     "react/require-default-props": "off",
     "no-restricted-syntax": 0,
     "function-paren-newline": 0,
@@ -57,6 +58,9 @@
   },
   "settings": {
     "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      },
       "alias": {
         "extensions": [".js"],
         "map": [

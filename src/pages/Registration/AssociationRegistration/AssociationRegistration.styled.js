@@ -22,11 +22,25 @@ export const StyledList = styled.ul`
 export const StyledListItem = styled.li`
   margin-bottom: 2px;
 `;
-export const StyledForm = styled.form``;
-export const StyledInput = styled(Input)``;
-export const StyledTextArea = styled(TextArea)``;
-export const StyledButton = styled(Button)``;
+export const StyledForm = styled.form`
+  max-width: 700px;
+  width: 100%;
+  padding: 0 20px;
+`;
+export const StyledInput = styled(Input)`
+  width: 100%;
+  margin-bottom: 1rem;
+`;
+export const StyledTextArea = styled(TextArea)`
+  width: 100%;
+  margin-bottom: 1rem;
+`;
+export const StyledButton = styled(Button)`
+  width: 100%;
+  margin: 1rem 0 1rem 0;
+`;
 export const StyledSelect = styled(Select)`
+  margin-bottom: 1rem;
   .select__placeholder {
     color: ${({ theme }) => `${theme.color.secondary}9c`};
   }
@@ -35,4 +49,9 @@ export const StyledText = styled.p`
   margin-top: 1rem;
   font-family: ${({ theme }) => theme.fontFamily.text};
   font-size: ${({ theme }) => theme.fontSize.pS};
+`;
+export const StyledError = styled.span`
+  color: ${({ theme }) => theme.color.error};
+  font-size: 0.8em;
+  margin-bottom: 20px;
 `;

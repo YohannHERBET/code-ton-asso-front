@@ -8,6 +8,7 @@ export const StyledContainerTextArea = styled.div`
 `;
 
 export const StyledTextArea = styled.textarea`
+  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   border: 2px solid

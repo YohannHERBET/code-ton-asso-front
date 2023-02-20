@@ -10,7 +10,6 @@ import {
 
 const Input = ({
   className,
-  classNameInput,
   error,
   name,
   label,
@@ -32,7 +31,6 @@ const Input = ({
       name={name}
       onChange={onChange}
       value={value}
-      className={classNameInput}
       placeholder={placeholder}
       required={required}
     />
@@ -42,7 +40,6 @@ const Input = ({
 
 Input.propTypes = {
   className: PropTypes.string,
-  classNameInput: PropTypes.string,
   error: PropTypes.string,
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,

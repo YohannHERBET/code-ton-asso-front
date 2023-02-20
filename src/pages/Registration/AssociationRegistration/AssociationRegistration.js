@@ -1,5 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import titleEnum from '../../../global/enums/titleEnum';
+import {
+  createUserAndAssociation,
+  getCategories,
+  checkRNA,
+} from '../../../utils/fetchAPI';
 
 import {
   StyledInscriptionContainer,
@@ -12,9 +17,12 @@ import {
   StyledTextArea,
   StyledText,
   StyledSelect,
+  StyledError,
 } from './AssociationRegistration.styled';
 
 const AssociationRegistration = () => {
+  const [categories, setCategories] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
   const [formValues, setFormValues] = useState({
     associationName: '',
     rna: '',
@@ -27,6 +35,19 @@ const AssociationRegistration = () => {
     categories: [],
   });
 
+  async function fetchCategories() {
+    try {
+      const categoriesFromBackend = await getCategories();
+      setCategories(categoriesFromBackend);
+    } catch (error) {
+      console.error("Une erreur s'est produite:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
   const handleChange = (event, type) => {
     if (!event.target && type === 'select') {
       return setFormValues({ ...formValues, categories: event });
@@ -35,29 +56,21 @@ const AssociationRegistration = () => {
     return setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Formulaire soumis pour inscription d'une association");
+    try {
+      if (formValues.password !== formValues.confirmPassword) {
+        setErrorMessage('Les mots de passe ne correpondent pas !');
+      } else if (await checkRNA(formValues.rna)) {
+        console.log('on passe par la');
+        createUserAndAssociation(formValues);
+      } else {
+        setErrorMessage("Le RNA n'existe pas !");
+      }
+    } catch (error) {
+      console.log("Une erreur s'est produite:", error);
+    }
   };
-
-  const options = [
-    {
-      value: 'Se créer un compte utilisateur',
-      label: 'Se créer un compte utilisateur',
-    },
-    {
-      value: 'Se connecter/se déconnecter',
-      label: 'Se connecter/se déconnecter',
-    },
-    {
-      value: 'Une barre de recherche',
-      label: 'Une barre de recherche',
-    },
-    {
-      value: 'Une carte',
-      label: 'Une carte',
-    },
-  ];
 
   return (
     <StyledInscriptionContainer>
@@ -87,7 +100,7 @@ const AssociationRegistration = () => {
         />
         <StyledSelect
           value={formValues.categories}
-          options={options}
+          options={categories}
           placeholder="Sélectionnez une catégorie"
           isMulti
           required
@@ -147,6 +160,7 @@ const AssociationRegistration = () => {
           onChange={handleChange}
           required
         />
+        <StyledError>{errorMessage}</StyledError>
         <StyledText>* Champs obligatoires</StyledText>
         <StyledButton label="M'inscrire" />
       </StyledForm>
