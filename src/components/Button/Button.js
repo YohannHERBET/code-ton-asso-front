@@ -33,7 +33,6 @@ const Button = (props) => {
   } = props;
 
   const StyledButton = getRightButton(variant);
-
   const button = to ? (
     <Link to={to}>
       <StyledButton className={className} $color={color} onClick={onClick}>

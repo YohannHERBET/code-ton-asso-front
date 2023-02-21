@@ -4,11 +4,36 @@ import Input from '../../../components/Input/Input';
 import Button from '../../../components/Button/Button';
 import TextArea from '../../../components/TextArea/TextArea';
 import Select from '../../../components/Select/Select';
+import breakpoints from '../../../global/breakpoints';
+import { ReactComponent as ArrowIcon } from '../../../assets/arrowBack.svg';
 
 export const StyledInscriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+export const StyledContainerTitle = styled.div`
+  display: flex;
+  align-items: center;
+`;
+export const StyledArrowBack = styled(ArrowIcon)`
+  margin-right: 20px;
+  circle {
+    transition: fill 0.3s ease;
+  }
+  path {
+    transition: fill 0.3s ease;
+  }
+  &:hover {
+    circle {
+      fill: ${({ theme }) => theme.color.primary};
+    }
+    path {
+      fill: white;
+    }
+    cursor: pointer;
+  }
 `;
 export const StyledTitle = styled(Title)`
   margin: 2rem 0;
@@ -35,6 +60,16 @@ export const StyledButton = styled(Button)`
 export const StyledTextArea = styled(TextArea)`
   width: 100%;
   margin-bottom: 1rem;
+  height: 295px;
+  textarea {
+    height: 100%;
+  }
+  @media ${breakpoints.mobileM} {
+    height: 230px;
+  }
+  @media ${breakpoints.tablet} {
+    height: 200px;
+  }
 `;
 export const StyledText = styled.p`
   margin-top: 1rem;

@@ -11,46 +11,42 @@ import {
   StyledTextArea,
   StyledSelect,
   StyledError,
+  StyledArrowBack,
+  StyledContainerTitle,
 } from './DeveloperRegistration.styled';
 
 const DeveloperRegistration = () => {
   const [errorMessage, setErrorMessage] = useState('');
-  const [isPageTwo, setIsPageTwo] = useState(true);
+  const [isPageTwo, setIsPageTwo] = useState(false);
   const [formValues, setFormValues] = useState({
     name: '',
     firstname: '',
     email: '',
     password: '',
     confirmPassword: '',
-    type: {},
-    level: {},
-    workPreferences: {},
+    type: '',
+    level: '',
+    workPreferences: '',
     skills: [],
     description: '',
   });
 
-  // skills a remplacer par une valeur dynamique
-  // flèche pour revenir en arrière quand t'es sur la page 2
-  // dynamiser le bouton suivant pour qu'il devienne m'inscrire quand on est sur la page 2
+  // appel api skills
+  // envoyer les data
+
   const handleChange = (event, type) => {
-    if (!event.target && type === 'select') {
-      return setFormValues({ ...formValues, skills: event });
+    if (!event.target) {
+      return setFormValues({ ...formValues, [type]: event });
     }
     const { name, value } = event.target;
     return setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      if (formValues.password !== formValues.confirmPassword) {
-        setErrorMessage('Les mots de passe ne correpondent pas !');
-      } else {
-        console.log('on passe par la');
-      }
-    } catch (error) {
-      console.log("Une erreur s'est produite:", error);
+  const checkPassword = () => {
+    if (formValues.password !== formValues.confirmPassword) {
+      return true;
     }
+    return false;
   };
 
   const skills = [
@@ -68,14 +64,14 @@ const DeveloperRegistration = () => {
     { value: 'Ruby', label: 'Ruby' },
   ];
   const type = [
-    { value: 'Frontend', label: 'front' },
-    { value: 'Backend', label: 'back' },
-    { value: 'Fullstack', label: 'fullstack' },
+    { value: 'Frontend', label: 'Frontend' },
+    { value: 'Backend', label: 'Backend' },
+    { value: 'Fullstack', label: 'Fullstack' },
   ];
   const workPreferences = [
     { value: 'Solo', label: 'en solo' },
-    { value: 'Both', label: 'Les deux me vont' },
     { value: 'Group', label: 'en groupe' },
+    { value: 'Both', label: 'Les deux me vont' },
   ];
   const level = [
     { value: 'Junior', label: 'junior' },
@@ -85,11 +81,14 @@ const DeveloperRegistration = () => {
 
   return (
     <StyledInscriptionContainer>
-      <StyledTitle
-        variant={titleEnum.h1}
-        content={`inscription ${!isPageTwo ? '1' : '2'}/2`}
-      />
-      <StyledForm onSubmit={handleSubmit}>
+      <StyledContainerTitle>
+        {isPageTwo && <StyledArrowBack onClick={() => setIsPageTwo(false)} />}
+        <StyledTitle
+          variant={titleEnum.h1}
+          content={`Inscription ${!isPageTwo ? '1' : '2'}/2`}
+        />
+      </StyledContainerTitle>
+      <StyledForm>
         {!isPageTwo && (
           <>
             <StyledInput
@@ -144,7 +143,8 @@ const DeveloperRegistration = () => {
             <StyledSelect
               value={formValues.skills}
               options={skills}
-              placeholder="Sélectionnez une catégorie"
+              name="skills"
+              placeholder="Les technos et compétences que tu as"
               isMulti
               required
               onChange={handleChange}
@@ -153,7 +153,8 @@ const DeveloperRegistration = () => {
             <StyledSelect
               value={formValues.type}
               options={type}
-              placeholder="Sélectionnez une catégorie"
+              name="type"
+              placeholder="Frontend, Backend, Fullstack"
               required
               onChange={handleChange}
               label="Je suis développeur..."
@@ -161,15 +162,17 @@ const DeveloperRegistration = () => {
             <StyledSelect
               value={formValues.workPreferences}
               options={workPreferences}
-              placeholder="Sélectionnez une catégorie"
-              required
+              name="workPreferences"
+              placeholder="Solo / Groupe / Les deux"
+              require
               onChange={handleChange}
               label="Je préfère travailler"
             />
             <StyledSelect
               value={formValues.level}
               options={level}
-              placeholder="Sélectionnez une catégorie"
+              name="level"
+              placeholder="Junior / Expérimenté / Senior"
               required
               onChange={handleChange}
               label="Je me considère (be honest!)"
@@ -185,10 +188,23 @@ const DeveloperRegistration = () => {
             />
           </>
         )}
-        <StyledError>{errorMessage}</StyledError>
+        {errorMessage && <StyledError>{errorMessage}</StyledError>}
         <StyledText>* Champs obligatoires</StyledText>
         {!isPageTwo ? (
-          <StyledButton label="Suivant" onClick={() => setIsPageTwo(true)} />
+          <StyledButton
+            type="button"
+            label="Suivant"
+            onClick={(e) => {
+              e.preventDefault();
+              const asError = checkPassword();
+              if (!asError) {
+                setErrorMessage('');
+                setIsPageTwo(true);
+              } else {
+                setErrorMessage('Les mots de passe ne correspondent pas');
+              }
+            }}
+          />
         ) : (
           <StyledButton label="M'inscrire" type="submit" />
         )}

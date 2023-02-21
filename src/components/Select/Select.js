@@ -108,7 +108,7 @@ const Select = ({
       hideSelectedOptions={false}
       isSearchable={false}
       value={value}
-      onChange={(e) => onChange(e, 'select')}
+      onChange={(e) => onChange(e, name)}
       error={error}
       isMulti={isMulti}
       name={name}
@@ -133,6 +133,10 @@ Select.propTypes = {
   isMulti: PropTypes.bool,
   required: PropTypes.bool,
   options: PropTypes.arrayOf(PropTypes.object).isRequired,
-  value: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  value: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+    PropTypes.string,
+  ]),
 };
 export default Select;
