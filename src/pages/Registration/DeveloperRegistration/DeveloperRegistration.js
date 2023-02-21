@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import titleEnum from '../../../global/enums/titleEnum';
+import { createUserAndDeveloper, getSkills } from '../../../utils/fetchAPI';
 
 import {
   StyledInscriptionContainer,
@@ -18,6 +20,7 @@ import {
 const DeveloperRegistration = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [isPageTwo, setIsPageTwo] = useState(false);
+  const [skills, setSkills] = useState([]);
   const [formValues, setFormValues] = useState({
     name: '',
     firstname: '',
@@ -30,9 +33,31 @@ const DeveloperRegistration = () => {
     skills: [],
     description: '',
   });
+  const navigate = useNavigate();
 
-  // appel api skills
-  // envoyer les data
+  async function fetchSkills() {
+    try {
+      const skillsFromBackend = await getSkills();
+      setSkills(skillsFromBackend);
+    } catch (error) {
+      console.error("Une erreur s'est produite:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchSkills();
+  }, []);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    createUserAndDeveloper(formValues);
+    try {
+      createUserAndDeveloper(formValues);
+      navigate('/connexion');
+    } catch (error) {
+      console.log("Une erreur s'est produite:", error);
+    }
+  };
 
   const handleChange = (event, type) => {
     if (!event.target) {
@@ -49,20 +74,6 @@ const DeveloperRegistration = () => {
     return false;
   };
 
-  const skills = [
-    { value: 'HTML', label: 'HTML' },
-    { value: 'CSS', label: 'CSS' },
-    { value: 'Javascript', label: 'Javascript' },
-    { value: 'React', label: 'React' },
-    { value: 'Node', label: 'Node' },
-    { value: 'PHP', label: 'PHP' },
-    { value: 'Python', label: 'Python' },
-    { value: 'Java', label: 'Java' },
-    { value: 'C++', label: 'C++' },
-    { value: 'C#', label: 'C#' },
-    { value: 'C', label: 'C' },
-    { value: 'Ruby', label: 'Ruby' },
-  ];
   const type = [
     { value: 'Frontend', label: 'Frontend' },
     { value: 'Backend', label: 'Backend' },
@@ -88,7 +99,7 @@ const DeveloperRegistration = () => {
           content={`Inscription ${!isPageTwo ? '1' : '2'}/2`}
         />
       </StyledContainerTitle>
-      <StyledForm>
+      <StyledForm onSubmit={handleSubmit}>
         {!isPageTwo && (
           <>
             <StyledInput
