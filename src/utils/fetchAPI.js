@@ -55,3 +55,13 @@ export const getCategories = async () => {
   );
   return categories.data;
 };
+
+export const getProjectTypes = async () => {
+  const types = await axios.get(`${process.env.REACT_APP_API_URL}types`);
+  return types.data;
+};
+
+export const getProjectFeatures = async () => {
+  const features = await axios.get(`${process.env.REACT_APP_API_URL}features`);
+  return features.data;
+};

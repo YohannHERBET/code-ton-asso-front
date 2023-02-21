@@ -4,6 +4,7 @@ import Exemple from '../pages/Exemple/Exemple';
 import Connection from '../pages/Connection/Connection';
 import List from '../templates/List/List';
 import cardTypeEnum from './enums/cardTypeEnum';
+import NewProject from '../pages/NewProject/NewProject';
 
 const routes = [
   {
@@ -43,6 +44,11 @@ const routes = [
       />
     ),
     title: 'développeurs',
+  },
+  {
+    path: 'creer-un-projet',
+    element: <NewProject />,
+    title: 'créer un projet',
   },
   {
     element: <Error404 />,
