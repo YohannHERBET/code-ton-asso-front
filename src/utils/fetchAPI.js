@@ -32,6 +32,23 @@ export const createUserAndAssociation = async (formValues) => {
   }
 };
 
+export const getAuth = async (formValues) => {
+  const auth = await axios.post(`${process.env.REACT_APP_API_URL}auth/login`, {
+    email: formValues?.email,
+    password: formValues?.password,
+  });
+  return auth.data;
+};
+
+export const getUser = async (userId) => {
+  const user = await axios.get(`${process.env.REACT_APP_API_URL}users`, {
+    params: {
+      id: userId,
+    },
+  });
+  return user.data;
+};
+
 export const getCategories = async () => {
   const categories = await axios.get(
     `${process.env.REACT_APP_API_URL}categories`
