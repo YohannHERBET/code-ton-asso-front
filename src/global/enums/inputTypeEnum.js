@@ -1,4 +1,5 @@
 const inputTypeEnum = {
+  date: 'date',
   text: 'text',
   email: 'email',
   password: 'password',

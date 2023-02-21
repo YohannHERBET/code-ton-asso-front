@@ -11,6 +11,10 @@ export const StyledSelect = styled(Select)`
         error ? theme.color.tertiary : theme.color.secondary} !important;
     }
   }
+
+  .select__placeholder {
+    color: ${({ theme }) => theme.color.secondaryLight};
+  }
   .css-t3ipsp-control {
     border-color: ${({ theme }) => theme.color.secondary};
     box-shadow: 0 0 0 1px ${({ theme }) => theme.color.secondary};
