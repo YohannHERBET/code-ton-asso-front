@@ -16,6 +16,8 @@ const Input = ({
   label,
   placeholder,
   type,
+  onChange,
+  value,
   required,
 }) => (
   <StyledContainerInput className={className}>
@@ -28,6 +30,8 @@ const Input = ({
       type={type}
       id={name}
       name={name}
+      onChange={onChange}
+      value={value}
       className={classNameInput}
       placeholder={placeholder}
       required={required}
@@ -42,6 +46,8 @@ Input.propTypes = {
   error: PropTypes.string,
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   type: PropTypes.string,
   required: PropTypes.bool,

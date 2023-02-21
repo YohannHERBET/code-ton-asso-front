@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import navigation from '../../global/navigation';
 import logo from '../../assets/logo.svg';
 import close from '../../assets/close.svg';
@@ -23,10 +23,16 @@ import {
   StyledSignup,
   StyledButtonContainer,
 } from './Navbar.styled';
+import { UserContext } from '../../context/userContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const isLogged = false;
+  const { authUser, removeUser } = useContext(UserContext);
+
+  const disconnect = () => {
+    setIsOpen(false);
+    removeUser();
+  };
 
   return (
     <StyledContainer>
@@ -47,11 +53,11 @@ const Navbar = () => {
               </StyledMenuLink>
             </StyledMenuItem>
           ))}
-          {isLogged ? (
+          {authUser ? (
             <StyledButtonMobile
               label="Me déconnecter"
               variant={buttonEnum.none}
-              onClick={() => setIsOpen(false)}
+              onClick={disconnect}
             />
           ) : (
             <>
@@ -70,7 +76,7 @@ const Navbar = () => {
         </StyledMenu>
       </StyledContainerLeft>
       <StyledContainerRight>
-        {isLogged && (
+        {authUser && (
           <StyledLink to="/profil">
             <StyledProfil src={profil} onClick={() => setIsOpen(false)} />
           </StyledLink>
@@ -80,11 +86,8 @@ const Navbar = () => {
         ) : (
           <StyledImage src={burger} onClick={() => setIsOpen(!isOpen)} />
         )}
-        {isLogged ? (
-          <StyledButton
-            label="Me déconnecter"
-            onClick={() => console.log('me déconnecter')}
-          />
+        {authUser ? (
+          <StyledButton label="Me déconnecter" onClick={disconnect} />
         ) : (
           <StyledButtonContainer>
             <StyledButton label="Me connecter" to="/connexion" />
