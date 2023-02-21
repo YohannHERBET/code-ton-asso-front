@@ -5,6 +5,7 @@ import Connection from '../pages/Connection/Connection';
 import List from '../templates/List/List';
 import cardTypeEnum from './enums/cardTypeEnum';
 import NewProject from '../pages/NewProject/NewProject';
+import Project from '../templates/Project/Project';
 
 const routes = [
   {
@@ -32,7 +33,7 @@ const routes = [
         type={cardTypeEnum.project}
       />
     ),
-    title: 'projects',
+    title: 'projets',
   },
   {
     path: 'developpeurs',
@@ -63,6 +64,11 @@ const routes = [
     path: 'connexion',
     element: <Connection />,
     title: 'connexion',
+  },
+  {
+    path: 'projets/:slug',
+    element: <Project type={cardTypeEnum.project} />,
+    title: 'Projet',
   },
 ];
 
