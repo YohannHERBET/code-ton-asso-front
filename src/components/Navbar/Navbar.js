@@ -24,6 +24,7 @@ import {
   StyledButtonContainer,
 } from './Navbar.styled';
 import { UserContext } from '../../context/userContext';
+import cardTypeEnum from '../../global/enums/cardTypeEnum';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +34,27 @@ const Navbar = () => {
     setIsOpen(false);
     removeUser();
   };
+
+  const navbarList = navigation
+    .filter((link) => {
+      if (link.for) {
+        if (authUser?.associationId) {
+          return link.for === cardTypeEnum.association;
+        }
+        if (authUser?.developerId) {
+          return link.for === cardTypeEnum.developer;
+        }
+        return false;
+      }
+      return true;
+    })
+    .map((link) => (
+      <StyledMenuItem key={link.title}>
+        <StyledMenuLink onClick={() => setIsOpen(false)} to={link.path}>
+          {link.title}
+        </StyledMenuLink>
+      </StyledMenuItem>
+    ));
 
   return (
     <StyledContainer>
@@ -46,13 +68,7 @@ const Navbar = () => {
           />
         </StyledLink>
         <StyledMenu isOpen={isOpen}>
-          {navigation.map((link) => (
-            <StyledMenuItem key={link.title}>
-              <StyledMenuLink onClick={() => setIsOpen(false)} to={link.path}>
-                {link.title}
-              </StyledMenuLink>
-            </StyledMenuItem>
-          ))}
+          {navbarList}
           {authUser ? (
             <StyledButtonMobile
               label="Me déconnecter"
