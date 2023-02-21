@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import titleEnum from '../../../global/enums/titleEnum';
 import {
   createUserAndAssociation,
@@ -21,6 +22,7 @@ import {
 } from './AssociationRegistration.styled';
 
 const AssociationRegistration = () => {
+  const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [formValues, setFormValues] = useState({
@@ -64,6 +66,7 @@ const AssociationRegistration = () => {
       } else if (await checkRNA(formValues.rna)) {
         console.log('on passe par la');
         createUserAndAssociation(formValues);
+        navigate('/connexion');
       } else {
         setErrorMessage("Le RNA n'existe pas !");
       }

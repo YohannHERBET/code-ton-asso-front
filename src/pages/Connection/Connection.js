@@ -33,14 +33,14 @@ const Connection = () => {
     //   );
     // }
     axios
-      .post(`${process.env.REACT_APP_API_URL}/auth/login`, {
+      .post(`${process.env.REACT_APP_API_URL}auth/login`, {
         email,
         password,
       })
       .then((response) => {
         console.log(response);
         localStorage.setItem('token', response.data.token);
-        navigate('/accueil');
+        navigate('/');
       })
       .catch((error) => {
         console.log(error);

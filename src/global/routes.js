@@ -4,6 +4,7 @@ import Exemple from '../pages/Exemple/Exemple';
 import Connection from '../pages/Connection/Connection';
 import RegistrationChoice from '../pages/Registration/RegistrationChoice/RegistrationChoice';
 import AssociationRegistration from '../pages/Registration/AssociationRegistration/AssociationRegistration';
+import DeveloperRegistration from '../pages/Registration/DeveloperRegistration/DeveloperRegistration';
 import List from '../templates/List/List';
 import cardTypeEnum from './enums/cardTypeEnum';
 
@@ -69,6 +70,11 @@ const routes = [
     path: 'inscription/association',
     element: <AssociationRegistration />,
     title: 'inscription association',
+  },
+  {
+    path: 'inscription/developpeur',
+    element: <DeveloperRegistration />,
+    title: 'inscription développeur',
   },
 ];
 
