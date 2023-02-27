@@ -51,8 +51,6 @@ const Project = (props) => {
     const { firstname, lastname } = currentProject.association.user;
     const { label: projectType } = currentProject.type;
 
-    console.log(currentProject);
-
     setProject({
       name: `${firstname} ${lastname}`,
       associationName: associationName,

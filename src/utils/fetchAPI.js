@@ -72,3 +72,10 @@ export const getProjectFeatures = async () => {
   const features = await axios.get(`${process.env.REACT_APP_API_URL}features`);
   return features.data;
 };
+
+export const getAssociation = async (slug) => {
+  const association = await axios.get(
+    `${process.env.REACT_APP_API_URL}associations/${slug}`
+  );
+  return association.data;
+};
