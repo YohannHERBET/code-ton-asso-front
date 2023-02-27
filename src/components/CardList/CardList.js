@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { StyledCard, StyledCardList } from './CardList.styled';
 
 const CardList = ({ list, type }) => {
-  console.log(list);
   const cardList = list?.map((item, index) => (
     <StyledCard
       key={item.id || index}
