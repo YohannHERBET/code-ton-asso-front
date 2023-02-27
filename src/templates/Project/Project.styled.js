@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
+import Card from '../../components/Card/Card';
 import Title from '../../components/Title/Title';
 import breakpoints from '../../global/breakpoints';
 
@@ -12,7 +13,7 @@ export const StyledProject = styled.section`
 export const StyledInfos = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 40px;
   margin: 0 10px;
   @media ${breakpoints.laptop} {
     flex-direction: row;
@@ -21,7 +22,6 @@ export const StyledInfos = styled.div`
   }
   @media ${breakpoints.tablet} {
     flex-direction: row;
-    margin: 0 100px;
   }
 `;
 
@@ -36,7 +36,7 @@ export const StyledRightContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 30px;
+  gap: 40px;
 `;
 
 export const StyledName = styled.p`
@@ -59,22 +59,29 @@ export const StyledTitle = styled(Title)`
   }
 `;
 
-export const StyledSubTitle = styled(Title)`
+export const StyledAssociationName = styled(Title)`
   font-size: ${({ theme }) => theme.fontSize.pM};
   font-weight: ${({ theme }) => theme.fontWeight.medium};
-  margin-bottom: 10px;
+  margin-bottom: 40px;
   text-align: center;
   @media ${breakpoints.tablet} {
+    margin-bottom: 10px;
     text-align: left;
     font-size: ${({ theme }) => theme.fontSize.pL};
   }
 `;
 
+export const StyledSubTitle = styled(Title)`
+  font-size: ${({ theme }) => theme.fontSize.pM};
+  font-weight: ${({ theme }) => theme.fontWeight.semiBold};
+  margin-bottom: 10px;
+  @media ${breakpoints.tablet} {
+    font-size: ${({ theme }) => theme.fontSize.pL};
+    font-weight: ${({ theme }) => theme.fontWeight.medium};
+  }
+`;
+
 export const StyledDescription = styled.p`
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
   line-height: 1.4rem;
 `;
 
@@ -94,4 +101,44 @@ export const StyledImage = styled.img`
 
 export const StyledBlock = styled.div``;
 
-export const StyledFeature = styled.p``;
+export const StyledFeature = styled.p`
+  display: inline;
+  line-height: 1.4rem;
+`;
+
+export const StyledDevelopers = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ hasDevelopers }) => (hasDevelopers ? '10px' : '0')};
+  margin: 0 10px;
+  @media ${breakpoints.laptop} {
+    margin: 0 100px;
+  }
+`;
+
+export const StyledCard = styled(Card)`
+  flex: 1;
+  width: 100%;
+`;
+
+export const StyledCardList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  @media ${breakpoints.tablet} {
+    flex-direction: row;
+  }
+`;
+
+export const StyledFeaturesList = styled.ul`
+  list-style-position: inside;
+  list-style-type: disc;
+`;
+
+export const StyledButtons = styled.div`
+  display: flex;
+  justify-content: center;
+`;
