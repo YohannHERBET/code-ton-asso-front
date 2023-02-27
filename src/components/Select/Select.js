@@ -108,7 +108,7 @@ const Select = ({
       hideSelectedOptions={false}
       isSearchable={false}
       value={value}
-      onChange={(e) => onChange(e, name)}
+      onChange={(event) => onChange(event, name)}
       error={error}
       isMulti={isMulti}
       name={name}

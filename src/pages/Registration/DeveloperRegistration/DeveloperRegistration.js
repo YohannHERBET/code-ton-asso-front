@@ -50,7 +50,6 @@ const DeveloperRegistration = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    createUserAndDeveloper(formValues);
     try {
       createUserAndDeveloper(formValues);
       navigate('/connexion');

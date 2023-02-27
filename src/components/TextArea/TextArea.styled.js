@@ -21,6 +21,7 @@ export const StyledTextArea = styled.textarea`
     error ? theme.color.tertiaryLight : theme.color.white};
   color: ${({ error, theme }) =>
     error ? theme.color.black : theme.color.secondary};
+  font-family: ${({ theme }) => theme.fontFamily.text};
   font-size: ${({ theme }) => theme.fontSize.pM};
   font-weight: ${({ theme }) => theme.fontWeight.medium};
   &::placeholder {

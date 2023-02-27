@@ -13,13 +13,10 @@ export const StyledCheckbox = styled.input`
   position: relative;
   outline: none;
   margin-right: 10px;
-
   &:before {
-    content: '✔';
     content: '✔';
     position: absolute;
     left: 50%;
-    top: 25%;
     top: 25%;
     transform: translate(-50%, -50%);
     width: 10px;

@@ -1,3 +1,5 @@
+import cardTypeEnum from './enums/cardTypeEnum';
+
 const navigation = [
   {
     path: '/projets',
@@ -10,6 +12,11 @@ const navigation = [
   {
     path: '/developpeurs',
     title: 'Les développeurs',
+  },
+  {
+    path: '/creer-un-projet',
+    title: 'Créer un projet',
+    for: cardTypeEnum.association,
   },
 ];
 

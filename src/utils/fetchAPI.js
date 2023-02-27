@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const createUserAndDeveloper = async (formValues) => {
   try {
-    const userResponse = await axios
+    await axios
       .post(`${process.env.REACT_APP_API_URL}auth/create-dev`, {
         firstname: formValues.firstname,
         lastname: formValues.name,
@@ -15,11 +15,6 @@ export const createUserAndDeveloper = async (formValues) => {
         work_preferences: formValues.workPreferences.value,
       })
       .then((response) => console.log(response));
-
-    console.log(
-      "Réponse de l'API pour création de l'utilisateur développeur :",
-      userResponse.data
-    );
   } catch (error) {
     console.error("Une erreur s'est produite:", error);
   }
@@ -58,9 +53,7 @@ export const getCategories = async () => {
 };
 
 export const getSkills = async () => {
-  const skills = await axios.get(
-    `${process.env.REACT_APP_API_URL}skills`
-  );
+  const skills = await axios.get(`${process.env.REACT_APP_API_URL}skills`);
   return skills.data;
 };
 
@@ -73,4 +66,31 @@ export const checkRNA = async (rnaNumber) => {
   } catch (error) {
     return error;
   }
+};
+
+export const getAuth = async (formValues) => {
+  const auth = await axios.post(`${process.env.REACT_APP_API_URL}auth/login`, {
+    email: formValues?.email,
+    password: formValues?.password,
+  });
+  return auth.data;
+};
+
+export const getUser = async (userId) => {
+  const user = await axios.get(`${process.env.REACT_APP_API_URL}users`, {
+    params: {
+      id: userId,
+    },
+  });
+  return user.data;
+};
+
+export const getProjectTypes = async () => {
+  const types = await axios.get(`${process.env.REACT_APP_API_URL}types`);
+  return types.data;
+};
+
+export const getProjectFeatures = async () => {
+  const features = await axios.get(`${process.env.REACT_APP_API_URL}features`);
+  return features.data;
 };

@@ -7,6 +7,7 @@ import AssociationRegistration from '../pages/Registration/AssociationRegistrati
 import DeveloperRegistration from '../pages/Registration/DeveloperRegistration/DeveloperRegistration';
 import List from '../templates/List/List';
 import cardTypeEnum from './enums/cardTypeEnum';
+import NewProject from '../pages/NewProject/NewProject';
 
 const routes = [
   {
@@ -46,6 +47,11 @@ const routes = [
       />
     ),
     title: 'développeurs',
+  },
+  {
+    path: 'creer-un-projet',
+    element: <NewProject />,
+    title: 'créer un projet',
   },
   {
     element: <Error404 />,
