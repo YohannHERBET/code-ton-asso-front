@@ -17,7 +17,7 @@ const routes = [
     path: 'associations',
     element: (
       <List
-        apiUrl={`${process.env.REACT_APP_API_URL}associations/latest`}
+        apiUrl={`${process.env.REACT_APP_API_URL}associations`}
         title="Liste des associations"
         type={cardTypeEnum.association}
       />
@@ -39,7 +39,7 @@ const routes = [
     path: 'developpeurs',
     element: (
       <List
-        apiUrl={`${process.env.REACT_APP_API_URL}developers/latest`}
+        apiUrl={`${process.env.REACT_APP_API_URL}developers`}
         title="Liste des développeurs"
         type={cardTypeEnum.developer}
       />

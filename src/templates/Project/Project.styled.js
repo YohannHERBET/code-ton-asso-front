@@ -12,11 +12,31 @@ export const StyledProject = styled.section`
 export const StyledInfos = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
   margin: 0 10px;
-  @media ${breakpoints.tablet} {
+  @media ${breakpoints.laptop} {
+    flex-direction: row;
+    gap: 100px;
     margin: 0 100px;
   }
+  @media ${breakpoints.tablet} {
+    flex-direction: row;
+    margin: 0 100px;
+  }
+`;
+
+export const StyledLeftContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  gap: 10px;
+`;
+
+export const StyledRightContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 30px;
 `;
 
 export const StyledName = styled.p`
@@ -71,3 +91,7 @@ export const StyledImage = styled.img`
   height: 350px;
   object-fit: cover;
 `;
+
+export const StyledBlock = styled.div``;
+
+export const StyledFeature = styled.p``;

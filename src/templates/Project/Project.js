@@ -8,15 +8,20 @@ import cardTypeEnum from '../../global/enums/cardTypeEnum';
 import cardTypeMatcher from '../../global/enums/cardTypeMatcher';
 import {
   StyledBackground,
+  StyledBlock,
   StyledDescription,
+  StyledFeature,
   StyledImage,
   StyledInfos,
+  StyledLeftContainer,
   StyledName,
   StyledProject,
+  StyledRightContainer,
   StyledSubTitle,
   StyledTitle,
 } from './Project.styled';
 import titleEnum from '../../global/enums/titleEnum';
+import { getFormatedDate } from '../../utils/formatDate';
 
 const Project = (props) => {
   const { type = cardTypeEnum.project } = props;
@@ -25,15 +30,28 @@ const Project = (props) => {
     associationName: '',
     title: '',
     description: '',
+    features: null,
+    developers: null,
+    otherFeatures: '',
+    releaseDate: '',
   });
   const { slug } = useParams();
 
   async function getProjectDetails() {
     const currentProject = await getProject(slug);
-    const { title, description } = currentProject;
+    const {
+      title,
+      description,
+      Features,
+      Developers,
+      other_features: otherFeatures,
+      release_date: releaseDate,
+    } = currentProject;
     const { association_name: associationName } = currentProject.association;
     const { firstname, lastname } = currentProject.association.user;
     const { label: projectType } = currentProject.type;
+
+    console.log(currentProject);
 
     setProject({
       name: `${firstname} ${lastname}`,
@@ -41,6 +59,10 @@ const Project = (props) => {
       title: title,
       description,
       type: projectType,
+      features: Features || null,
+      developers: Developers || null,
+      otherFeatures,
+      releaseDate,
     });
   }
 
@@ -49,6 +71,10 @@ const Project = (props) => {
   }, []);
 
   const StyledIcon = cardTypeMatcher[type];
+
+  const featuresList = project.features?.map((feature) => (
+    <StyledFeature key={feature.id}>{feature.label}</StyledFeature>
+  ));
 
   return (
     <StyledProject>
@@ -60,13 +86,44 @@ const Project = (props) => {
         </StyledBackground>
       )}
       <StyledInfos>
-        <StyledName>{project.name}</StyledName>
-        <StyledTitle content={project.title} variant={titleEnum.h1} />
-        <StyledSubTitle
-          content={`${project.associationName} - ${project.type}`}
-          variant={titleEnum.h2}
-        />
-        <StyledDescription>{project.description}</StyledDescription>
+        <StyledLeftContainer>
+          <StyledName>{project.name}</StyledName>
+          <StyledTitle content={project.title} variant={titleEnum.h1} />
+          <StyledSubTitle
+            content={`${project.associationName} - ${project.type}`}
+            variant={titleEnum.h2}
+          />
+          <StyledDescription>{project.description}</StyledDescription>
+        </StyledLeftContainer>
+        <StyledRightContainer>
+          {featuresList && (
+            <StyledBlock>
+              <StyledSubTitle
+                content="Fonctionnalités voulues"
+                variant={titleEnum.h2}
+              />
+              {featuresList}
+            </StyledBlock>
+          )}
+          {project.otherFeatures && (
+            <StyledBlock>
+              <StyledSubTitle
+                content="Autres Fonctionnalités"
+                variant={titleEnum.h2}
+              />
+              <StyledDescription>{project.otherFeatures}</StyledDescription>
+            </StyledBlock>
+          )}
+          {project.releaseDate && (
+            <StyledBlock>
+              <StyledSubTitle
+                content="Date de mise en ligne souhaitée"
+                variant={titleEnum.h2}
+              />
+              {getFormatedDate(project.releaseDate)}
+            </StyledBlock>
+          )}
+        </StyledRightContainer>
       </StyledInfos>
     </StyledProject>
   );
