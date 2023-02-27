@@ -7,10 +7,16 @@ import { getProject } from '../../utils/fetchAPI';
 import cardTypeEnum from '../../global/enums/cardTypeEnum';
 import cardTypeMatcher from '../../global/enums/cardTypeMatcher';
 import {
+  StyledAssociationName,
   StyledBackground,
   StyledBlock,
+  StyledButtons,
+  StyledCard,
+  StyledCardList,
   StyledDescription,
+  StyledDevelopers,
   StyledFeature,
+  StyledFeaturesList,
   StyledImage,
   StyledInfos,
   StyledLeftContainer,
@@ -22,6 +28,8 @@ import {
 } from './Project.styled';
 import titleEnum from '../../global/enums/titleEnum';
 import { getFormatedDate } from '../../utils/formatDate';
+import Button from '../../components/Button/Button';
+import buttonEnum from '../../global/enums/buttonEnum';
 
 const Project = (props) => {
   const { type = cardTypeEnum.project } = props;
@@ -35,9 +43,14 @@ const Project = (props) => {
     otherFeatures: '',
     releaseDate: '',
   });
+  const [isMyProject, setIsMyProject] = useState(false);
   const { slug } = useParams();
 
-  async function getProjectDetails() {
+  const contactAssociation = () => {
+    window.location.href = `mailto:${project.email}`;
+  };
+
+  const getProjectDetails = async () => {
     const currentProject = await getProject(slug);
     const {
       title,
@@ -48,8 +61,11 @@ const Project = (props) => {
       release_date: releaseDate,
     } = currentProject;
     const { association_name: associationName } = currentProject.association;
-    const { firstname, lastname } = currentProject.association.user;
+    const { firstname, lastname, email } = currentProject.association.user;
     const { label: projectType } = currentProject.type;
+
+    // TODO:
+    setIsMyProject(false);
 
     setProject({
       name: `${firstname} ${lastname}`,
@@ -61,8 +77,9 @@ const Project = (props) => {
       developers: Developers || null,
       otherFeatures,
       releaseDate,
+      email,
     });
-  }
+  };
 
   useEffect(() => {
     getProjectDetails();
@@ -71,8 +88,23 @@ const Project = (props) => {
   const StyledIcon = cardTypeMatcher[type];
 
   const featuresList = project.features?.map((feature) => (
-    <StyledFeature key={feature.id}>{feature.label}</StyledFeature>
+    <li key={feature.id}>
+      <StyledFeature>{feature.label}</StyledFeature>
+    </li>
   ));
+
+  const developersList = project.developers?.map((developer) => {
+    const { firstname, lastname, description } = developer.user;
+    return (
+      <StyledCard
+        key={developer.id}
+        title={`${firstname} ${lastname}`}
+        description={description}
+        slug={`/developpeurs/${developer.slug}`}
+        type={cardTypeEnum.developer}
+      />
+    );
+  });
 
   return (
     <StyledProject>
@@ -87,7 +119,7 @@ const Project = (props) => {
         <StyledLeftContainer>
           <StyledName>{project.name}</StyledName>
           <StyledTitle content={project.title} variant={titleEnum.h1} />
-          <StyledSubTitle
+          <StyledAssociationName
             content={`${project.associationName} - ${project.type}`}
             variant={titleEnum.h2}
           />
@@ -100,7 +132,7 @@ const Project = (props) => {
                 content="Fonctionnalités voulues"
                 variant={titleEnum.h2}
               />
-              {featuresList}
+              <StyledFeaturesList>{featuresList}</StyledFeaturesList>
             </StyledBlock>
           )}
           {project.otherFeatures && (
@@ -123,6 +155,30 @@ const Project = (props) => {
           )}
         </StyledRightContainer>
       </StyledInfos>
+      <StyledDevelopers hasDevelopers={developersList?.length}>
+        <StyledSubTitle content="Les participants" variant={titleEnum.h2} />
+        {developersList?.length ? (
+          <StyledCardList>{developersList}</StyledCardList>
+        ) : (
+          <StyledDescription>
+            Pas encore de participants pour ce projet, lance-toi!
+          </StyledDescription>
+        )}
+      </StyledDevelopers>
+      <StyledButtons>
+        {isMyProject ? (
+          <Button label="Masquer mon projet" />
+        ) : (
+          <>
+            <Button label="Participer au projet" />
+            <Button
+              label="Contacter l'association"
+              variant={buttonEnum.outline}
+              onClick={contactAssociation}
+            />
+          </>
+        )}
+      </StyledButtons>
     </StyledProject>
   );
 };
