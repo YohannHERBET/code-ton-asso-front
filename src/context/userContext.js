@@ -1,6 +1,8 @@
 import { createContext, useState, useMemo, useEffect } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import jwtDecode from 'jwt-decode';
 import PropTypes from 'prop-types';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import Cookies from 'js-cookie';
 
 export const UserContext = createContext();

@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import Cookies from 'js-cookie';
 import titleEnum from '../../global/enums/titleEnum';
 import buttonEnum from '../../global/enums/buttonEnum';
@@ -61,7 +62,6 @@ const Connection = () => {
             type="email"
             label="Email"
             placeholder="Entrez votre email"
-            classNameInput="classNameInput"
             name="email-connection"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -69,7 +69,6 @@ const Connection = () => {
           <StyledInput
             type="password"
             label="Mot de passe"
-            classNameInput="classNameInput"
             placeholder="Entrez votre mot de passe"
             name="password-connection"
             value={password}

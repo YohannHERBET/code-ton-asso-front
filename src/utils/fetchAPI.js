@@ -1,35 +1,46 @@
 import axios from 'axios';
 
+export const createUserAndDeveloper = async (formValues) => {
+  await axios.post(`${process.env.REACT_APP_API_URL}auth/create-dev`, {
+    firstname: formValues.firstname,
+    lastname: formValues.name,
+    email: formValues.email,
+    password: formValues.password,
+    description: formValues.description,
+    slug: formValues.name,
+    type: formValues.type.value,
+    level: formValues.level.value,
+    work_preferences: formValues.workPreferences.value,
+  });
+};
+
 export const createUserAndAssociation = async (formValues) => {
-  try {
-    const associationResponse = await axios.post(
-      `${process.env.REACT_APP_API_URL}associations`,
-      {
-        rna: formValues.rna,
-        association_name: formValues.associationName,
-        slug: formValues.name,
-      }
-    );
-    const userResponse = await axios.post(
-      `${process.env.REACT_APP_API_URL}users`,
-      {
-        firstname: formValues.firstname,
-        lastname: formValues.name,
-        email: formValues.email,
-        description: formValues.description,
-        developer_id: null,
-        association_id: associationResponse.data.id,
-      }
-    );
-    console.log(
-      "Réponse de l'API pour création de l'utilisateur :",
-      userResponse.data,
-      "Réponse de l'API pour création de l'asso :",
-      associationResponse
-    );
-  } catch (error) {
-    console.error("Une erreur s'est produite:", error);
-  }
+  await axios.post(`${process.env.REACT_APP_API_URL}auth/create-asso`, {
+    firstname: formValues.firstname,
+    lastname: formValues.name,
+    email: formValues.email,
+    password: formValues.password,
+    description: formValues.description,
+    rna: formValues.rna,
+    association_name: formValues.associationName,
+    slug: formValues.name,
+  });
+};
+
+export const getCategories = async () => {
+  const categories = await axios.get(
+    `${process.env.REACT_APP_API_URL}categories`
+  );
+  return categories.data;
+};
+
+export const getSkills = async () => {
+  const skills = await axios.get(`${process.env.REACT_APP_API_URL}skills`);
+  return skills.data;
+};
+
+export const checkRNA = async (rnaNumber) => {
+  await axios.get(`https://entreprise.data.gouv.fr/api/rna/v1/id/${rnaNumber}`);
 };
 
 export const getAuth = async (formValues) => {
@@ -47,13 +58,6 @@ export const getUser = async (userId) => {
     },
   });
   return user.data;
-};
-
-export const getCategories = async () => {
-  const categories = await axios.get(
-    `${process.env.REACT_APP_API_URL}categories`
-  );
-  return categories.data;
 };
 
 export const getProjectTypes = async () => {

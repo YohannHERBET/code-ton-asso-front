@@ -9,6 +9,7 @@ export const StyledContainerInput = styled.div`
 `;
 
 export const StyledInput = styled.input`
+  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   border: 2px solid

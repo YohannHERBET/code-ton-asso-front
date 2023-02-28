@@ -59,6 +59,7 @@ export const StyledLogo = styled.img`
 `;
 
 export const StyledMenu = styled.ul`
+  z-index: 9999;
   display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
   list-style: none;
   margin: 0;

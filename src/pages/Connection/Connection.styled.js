@@ -50,9 +50,6 @@ export const StyledForm = styled.form`
 export const StyledInput = styled(Input)`
   margin-bottom: 20px;
   width: 100%;
-  & .classNameInput {
-    width: 100%;
-  }
 `;
 
 export const StyledForgotPassword = styled.span`
