@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-import { getProject, joinProject, quitProject } from '../../utils/fetchAPI';
+import {
+  getProject,
+  joinProject,
+  quitProject,
+  updateProject,
+} from '../../utils/fetchAPI';
 
 import cardTypeEnum from '../../global/enums/cardTypeEnum';
 import cardTypeMatcher from '../../global/enums/cardTypeMatcher';
@@ -86,6 +91,7 @@ const Project = (props) => {
       Developers,
       other_features: otherFeatures,
       release_date: releaseDate,
+      visible,
     } = currentProject;
     const { association_name: associationName } = currentProject.association;
     const {
@@ -109,12 +115,30 @@ const Project = (props) => {
       otherFeatures,
       releaseDate,
       email,
+      visible,
     });
   };
 
   useEffect(() => {
     getProjectDetails();
   }, []);
+
+  const toggleVisibleProject = async () => {
+    const token = Cookies.get('token');
+    try {
+      const payload = {
+        visible: !project.visible,
+      };
+      await updateProject({
+        projectId: project.id,
+        payload,
+        token,
+      });
+      await getProjectDetails();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleJoinProject = async () => {
     try {
@@ -146,7 +170,17 @@ const Project = (props) => {
 
   const getButtons = () => {
     if (userType === userTypeEnum.association) {
-      return isMyProject ? <Button label="Masquer mon projet" /> : null;
+      if (isMyProject) {
+        return project.visible ? (
+          <Button label="Masquer mon projet" onClick={toggleVisibleProject} />
+        ) : (
+          <Button
+            label="Rendre visible mon projet"
+            onClick={toggleVisibleProject}
+          />
+        );
+      }
+      return null;
     }
     if (userType === userTypeEnum.developer) {
       return (

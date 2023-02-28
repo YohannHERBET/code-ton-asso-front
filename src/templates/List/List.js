@@ -11,6 +11,7 @@ import {
   StyledList,
   StyledTitle,
 } from './List.styled';
+import cardTypeEnum from '../../global/enums/cardTypeEnum';
 
 const List = (props) => {
   const { type, title, apiUrl } = props;
@@ -19,7 +20,11 @@ const List = (props) => {
 
   async function fetchData() {
     const response = await axios.get(apiUrl);
-    setList(response.data);
+    setList(
+      type === cardTypeEnum.project
+        ? response.data.filter((project) => project.visible === true)
+        : response.data
+    );
   }
 
   useEffect(() => {

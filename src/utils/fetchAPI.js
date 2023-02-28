@@ -97,8 +97,20 @@ export const quitProject = async ({ developerId, projectId, token }) => {
         Authorization: `Bearer ${token}`,
       },
       data: { developerId, projectId },
-    },
-    {}
+    }
+  );
+  return response.data;
+};
+
+export const updateProject = async ({ projectId, payload, token }) => {
+  const response = await axios.put(
+    `${process.env.REACT_APP_API_URL}projects/${projectId}`,
+    payload,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
   );
   return response.data;
 };
