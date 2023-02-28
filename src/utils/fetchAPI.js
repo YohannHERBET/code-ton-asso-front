@@ -79,3 +79,10 @@ export const getAssociation = async (slug) => {
   );
   return association.data;
 };
+
+export const getDeveloper = async (slug) => {
+  const developer = await axios.get(
+    `${process.env.REACT_APP_API_URL}developers/${slug}`
+  );
+  return developer.data;
+};

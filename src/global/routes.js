@@ -73,8 +73,17 @@ const routes = [
   },
   {
     path: 'associations/:slug',
-    element: <UserDetails type={cardTypeEnum.project} />,
+    element: (
+      <UserDetails userType="association" cardType={cardTypeEnum.project} />
+    ),
     title: 'association',
+  },
+  {
+    path: 'developpeurs/:slug',
+    element: (
+      <UserDetails userType="developer" cardType={cardTypeEnum.project} />
+    ),
+    title: 'développeur',
   },
 ];
 

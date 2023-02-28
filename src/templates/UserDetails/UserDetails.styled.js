@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Card from '../../components/Card/Card';
 import Tag from '../../components/Tag/Tag';
 
 import Title from '../../components/Title/Title';
@@ -15,7 +16,7 @@ export const StyledInfos = styled.div`
   flex-direction: column;
   gap: 10px;
   margin: 0 10px;
-  @media ${breakpoints.tablet} {
+  @media ${breakpoints.laptop} {
     margin: 0 100px;
   }
 `;
@@ -73,4 +74,58 @@ export const StyledImage = styled.img`
   object-fit: cover;
 `;
 
-export const StyledTag = styled(Tag)``;
+export const StyledTagContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 10px;
+  @media ${breakpoints.mobileM} {
+    margin-right: 10px;
+  }
+  @media ${breakpoints.tablet} {
+    justify-content: left;
+  }
+`;
+
+export const StyledTag = styled(Tag)`
+  margin-bottom: 10px;
+  @media ${breakpoints.mobileM} {
+    margin-right: 10px;
+  }
+`;
+
+export const StyledProjects = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ hasProjects }) => (hasProjects ? '10px' : '0')};
+  margin: 0 10px;
+  @media ${breakpoints.laptop} {
+    margin: 0 100px;
+  }
+`;
+
+export const StyledCard = styled(Card)`
+  flex: 1;
+  width: 100%;
+`;
+
+export const StyledCardList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  @media ${breakpoints.tablet} {
+    flex-direction: row;
+  }
+`;
+
+export const StyledButtons = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const StyledWorkPref = styled.div`
+  display: flex;
+`;
