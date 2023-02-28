@@ -21,6 +21,7 @@ const InputOption = ({
   children,
   innerProps,
   isMulti,
+  onChange,
   ...rest
 }) => {
   const [isActive, setIsActive] = useState(false);
@@ -52,13 +53,19 @@ const InputOption = ({
   return (
     <components.Option
       {...rest}
+      onChange={onChange}
       isDisabled={isDisabled}
       isFocused={isFocused}
       isSelected={isSelected}
       getStyles={getStyles}
       innerProps={props}
     >
-      {isMulti && <Checkbox checked={isSelected} />}
+      {isMulti && (
+        <Checkbox
+          checked={isSelected}
+          onChange={() => onChange({ target: { value: !isSelected } })}
+        />
+      )}
       {children}
     </components.Option>
   );
@@ -76,6 +83,7 @@ InputOption.propTypes = {
   onMouseDown: PropTypes.func,
   onMouseUp: PropTypes.func,
   onMouseLeave: PropTypes.func,
+  onChange: PropTypes.func,
 };
 
 const Select = ({
@@ -125,6 +133,10 @@ Select.propTypes = {
   isMulti: PropTypes.bool,
   required: PropTypes.bool,
   options: PropTypes.arrayOf(PropTypes.object).isRequired,
-  value: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  value: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+    PropTypes.string,
+  ]),
 };
 export default Select;

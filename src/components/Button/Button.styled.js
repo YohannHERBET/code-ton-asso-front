@@ -4,6 +4,7 @@ const COLOR_SUFFIX = 'Light';
 
 const cssButton = css`
   display: flex;
+  justify-content: center;
   margin: 10px;
   box-sizing: border-box;
   padding: 10px 50px;
