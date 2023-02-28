@@ -65,6 +65,13 @@ export const getProjectTypes = async () => {
   return types.data;
 };
 
+export const getProject = async (slug) => {
+  const project = await axios.get(
+    `${process.env.REACT_APP_API_URL}projects/${slug}`
+  );
+  return project.data;
+};
+
 export const getProjectFeatures = async () => {
   const features = await axios.get(`${process.env.REACT_APP_API_URL}features`);
   return features.data;

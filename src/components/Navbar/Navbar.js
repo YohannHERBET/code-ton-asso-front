@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useRef, useEffect } from 'react';
 import navigation from '../../global/navigation';
 import logo from '../../assets/logo.svg';
 import close from '../../assets/close.svg';
@@ -29,11 +29,24 @@ import cardTypeEnum from '../../global/enums/cardTypeEnum';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { authUser, removeUser } = useContext(UserContext);
+  const navbarRef = useRef(null);
 
   const disconnect = () => {
     setIsOpen(false);
     removeUser();
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [navbarRef]);
 
   const navbarList = navigation
     .filter((link) => {
@@ -57,7 +70,7 @@ const Navbar = () => {
     ));
 
   return (
-    <StyledContainer>
+    <StyledContainer ref={navbarRef}>
       <StyledContainerLeft>
         <StyledLink to="/">
           <StyledLogo
@@ -81,11 +94,13 @@ const Navbar = () => {
                 label="Me connecter"
                 variant={buttonEnum.none}
                 to="/connexion"
+                onClick={() => setIsOpen(false)}
               />
               <StyledButtonMobile
                 label="M'inscrire"
                 variant={buttonEnum.none}
                 to="/inscription"
+                onClick={() => setIsOpen(false)}
               />
             </>
           )}

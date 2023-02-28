@@ -8,6 +8,7 @@ import DeveloperRegistration from '../pages/Registration/DeveloperRegistration/D
 import List from '../templates/List/List';
 import cardTypeEnum from './enums/cardTypeEnum';
 import NewProject from '../pages/NewProject/NewProject';
+import Project from '../templates/Project/Project';
 
 const routes = [
   {
@@ -19,7 +20,7 @@ const routes = [
     path: 'associations',
     element: (
       <List
-        apiUrl={`${process.env.REACT_APP_API_URL}associations/latest`}
+        apiUrl={`${process.env.REACT_APP_API_URL}associations`}
         title="Liste des associations"
         type={cardTypeEnum.association}
       />
@@ -35,13 +36,13 @@ const routes = [
         type={cardTypeEnum.project}
       />
     ),
-    title: 'projects',
+    title: 'projets',
   },
   {
     path: 'developpeurs',
     element: (
       <List
-        apiUrl={`${process.env.REACT_APP_API_URL}developers/latest`}
+        apiUrl={`${process.env.REACT_APP_API_URL}developers`}
         title="Liste des développeurs"
         type={cardTypeEnum.developer}
       />
@@ -81,6 +82,11 @@ const routes = [
     path: 'inscription/developpeur',
     element: <DeveloperRegistration />,
     title: 'inscription développeur',
+  },
+  {
+    path: 'projets/:slug',
+    element: <Project type={cardTypeEnum.project} />,
+    title: 'Projet',
   },
 ];
 
