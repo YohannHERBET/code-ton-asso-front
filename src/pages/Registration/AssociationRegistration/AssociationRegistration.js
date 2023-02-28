@@ -37,6 +37,13 @@ const AssociationRegistration = () => {
     categories: [],
   });
 
+  const checkPassword = () => {
+    if (formValues.password !== formValues.confirmPassword) {
+      return true;
+    }
+    return false;
+  };
+
   async function fetchCategories() {
     try {
       const categoriesFromBackend = await getCategories();
@@ -50,8 +57,8 @@ const AssociationRegistration = () => {
     fetchCategories();
   }, []);
 
-  const handleChange = (event, type) => {
-    if (!event.target && type === 'select') {
+  const handleChange = (event) => {
+    if (!event.target) {
       return setFormValues({ ...formValues, categories: event });
     }
     const { name, value } = event.target;
@@ -61,17 +68,21 @@ const AssociationRegistration = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      if (formValues.password !== formValues.confirmPassword) {
-        setErrorMessage('Les mots de passe ne correpondent pas !');
-      } else if (await checkRNA(formValues.rna)) {
-        console.log('on passe par la');
-        createUserAndAssociation(formValues);
+      const asError = checkPassword();
+      if (!asError) {
+        setErrorMessage('');
+        await checkRNA(formValues.rna);
+        await createUserAndAssociation(formValues);
         navigate('/connexion');
       } else {
-        setErrorMessage("Le RNA n'existe pas !");
+        setErrorMessage('Les mots de passe ne correspondent pas');
       }
     } catch (error) {
-      console.log("Une erreur s'est produite:", error);
+      if (error.response?.status === 400) {
+        setErrorMessage(error.response.data);
+      } else {
+        setErrorMessage('Le numéro RNA est invalide');
+      }
     }
   };
 
@@ -163,7 +174,7 @@ const AssociationRegistration = () => {
           onChange={handleChange}
           required
         />
-        <StyledError>{errorMessage}</StyledError>
+        {errorMessage && <StyledError>{errorMessage}</StyledError>}
         <StyledText>* Champs obligatoires</StyledText>
         <StyledButton label="M'inscrire" />
       </StyledForm>

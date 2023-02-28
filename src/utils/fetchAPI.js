@@ -1,48 +1,30 @@
 import axios from 'axios';
 
 export const createUserAndDeveloper = async (formValues) => {
-  try {
-    await axios
-      .post(`${process.env.REACT_APP_API_URL}auth/create-dev`, {
-        firstname: formValues.firstname,
-        lastname: formValues.name,
-        email: formValues.email,
-        password: formValues.password,
-        description: formValues.description,
-        slug: formValues.name,
-        type: formValues.type.value,
-        level: formValues.level.value,
-        work_preferences: formValues.workPreferences.value,
-      })
-      .then((response) => console.log(response));
-  } catch (error) {
-    console.error("Une erreur s'est produite:", error);
-  }
+  await axios.post(`${process.env.REACT_APP_API_URL}auth/create-dev`, {
+    firstname: formValues.firstname,
+    lastname: formValues.name,
+    email: formValues.email,
+    password: formValues.password,
+    description: formValues.description,
+    slug: formValues.name,
+    type: formValues.type.value,
+    level: formValues.level.value,
+    work_preferences: formValues.workPreferences.value,
+  });
 };
 
 export const createUserAndAssociation = async (formValues) => {
-  try {
-    console.log('on passe par la bordel');
-    const userResponse = await axios
-      .post(`${process.env.REACT_APP_API_URL}auth/create-asso`, {
-        firstname: formValues.firstname,
-        lastname: formValues.name,
-        email: formValues.email,
-        password: formValues.password,
-        description: formValues.description,
-        rna: formValues.rna,
-        association_name: formValues.associationName,
-        slug: formValues.name,
-      })
-      .then((response) => console.log(response));
-
-    console.log(
-      "Réponse de l'API pour création de l'asso :",
-      userResponse.data
-    );
-  } catch (error) {
-    console.error("Une erreur s'est produite:", error);
-  }
+  await axios.post(`${process.env.REACT_APP_API_URL}auth/create-asso`, {
+    firstname: formValues.firstname,
+    lastname: formValues.name,
+    email: formValues.email,
+    password: formValues.password,
+    description: formValues.description,
+    rna: formValues.rna,
+    association_name: formValues.associationName,
+    slug: formValues.name,
+  });
 };
 
 export const getCategories = async () => {
@@ -58,14 +40,7 @@ export const getSkills = async () => {
 };
 
 export const checkRNA = async (rnaNumber) => {
-  try {
-    const rna = await axios.get(
-      `https://entreprise.data.gouv.fr/api/rna/v1/id/${rnaNumber}`
-    );
-    return rna.data;
-  } catch (error) {
-    return error;
-  }
+  await axios.get(`https://entreprise.data.gouv.fr/api/rna/v1/id/${rnaNumber}`);
 };
 
 export const getAuth = async (formValues) => {

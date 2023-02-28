@@ -48,13 +48,23 @@ const DeveloperRegistration = () => {
     fetchSkills();
   }, []);
 
-  const handleSubmit = (event) => {
+  const checkPassword = () => {
+    if (formValues.password !== formValues.confirmPassword) {
+      return true;
+    }
+    return false;
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      createUserAndDeveloper(formValues);
-      navigate('/connexion');
+      const asError = checkPassword();
+      if (!asError) {
+        await createUserAndDeveloper(formValues);
+        navigate('/connexion');
+      }
     } catch (error) {
-      console.log("Une erreur s'est produite:", error);
+      setErrorMessage(error.response.data);
     }
   };
 
@@ -64,13 +74,6 @@ const DeveloperRegistration = () => {
     }
     const { name, value } = event.target;
     return setFormValues({ ...formValues, [name]: value });
-  };
-
-  const checkPassword = () => {
-    if (formValues.password !== formValues.confirmPassword) {
-      return true;
-    }
-    return false;
   };
 
   const type = [
