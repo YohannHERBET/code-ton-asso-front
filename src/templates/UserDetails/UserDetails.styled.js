@@ -62,6 +62,9 @@ export const StyledDescription = styled.p`
 export const StyledNoProjectDescription = styled.p`
   line-height: 1.4rem;
   text-align: center;
+  @media ${breakpoints.tablet} {
+    text-align: left;
+  }
 `;
 
 export const StyledBackground = styled.div`

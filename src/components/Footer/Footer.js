@@ -17,7 +17,7 @@ const Footer = () => {
     <StyledFooter>
       <StyledLogo />
       <StyledLinks>{linksList}</StyledLinks>
-      <StyledCopyright>©2022 Code Ton Asso</StyledCopyright>
+      <StyledCopyright>©2023 Code Ton Asso</StyledCopyright>
     </StyledFooter>
   );
 };

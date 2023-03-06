@@ -70,6 +70,10 @@ const Navbar = () => {
       </StyledMenuItem>
     ));
 
+  const userPath = authUser?.associationId
+    ? `/associations/${authUser.slug}`
+    : `/developpeurs/${authUser?.slug}`;
+
   return (
     <StyledContainer ref={navbarRef}>
       <StyledContainerLeft>
@@ -109,7 +113,7 @@ const Navbar = () => {
       </StyledContainerLeft>
       <StyledContainerRight>
         {authUser && (
-          <StyledLink to="/profil">
+          <StyledLink to={userPath}>
             <StyledProfil src={profil} onClick={() => setIsOpen(false)} />
           </StyledLink>
         )}
