@@ -96,7 +96,7 @@ export const createProject = async (data, associationId) => {
   });
   return response.data;
 };
- 
+
 export const getAssociation = async (slug) => {
   const association = await axios.get(
     `${process.env.REACT_APP_API_URL}associations/${slug}`
