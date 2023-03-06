@@ -17,8 +17,9 @@ const UserContextProvider = ({ children }) => {
 
   const handleSetAuthUser = () => {
     const token = Cookies.get('token');
-    const { email, userId, developerId, associationId } = jwtDecode(token);
-    setAuthUser({ email, id: userId, associationId, developerId });
+    const { email, userId, developerId, associationId, slug } =
+      jwtDecode(token);
+    setAuthUser({ email, id: userId, associationId, developerId, slug });
   };
 
   useEffect(() => {

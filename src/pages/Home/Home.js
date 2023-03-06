@@ -121,7 +121,7 @@ const Home = () => {
           />
           <StyledSlider>
             {projects}
-            <StyledCardMore title="Voir tout les projets" slug={PROJECT_SLUG} />
+            <StyledCardMore title="Voir tous les projets" slug={PROJECT_SLUG} />
           </StyledSlider>
         </StyledSection>
       )}
@@ -150,7 +150,7 @@ const Home = () => {
           <StyledSlider>
             {developers}
             <StyledCardMore
-              title="Voir tout les développeurs"
+              title="Voir tous les développeurs"
               slug={DEVELOPER_SLUG}
             />
           </StyledSlider>
