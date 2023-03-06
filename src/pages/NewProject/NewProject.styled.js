@@ -17,6 +17,12 @@ export const StyledNewProject = styled.section`
 
 export const StyledTitle = styled(Title)``;
 
+export const StyledError = styled.span`
+  color: ${({ theme }) => theme.color.error};
+  font-size: 0.8em;
+  margin-bottom: 20px;
+`;
+
 export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;

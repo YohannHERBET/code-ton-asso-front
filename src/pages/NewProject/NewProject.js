@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   StyledNewProject,
   StyledTitle,
   StyledForm,
   StyledInput,
   StyledSelect,
+  StyledError,
   StyledTextArea,
   StyledButton,
 } from './NewProject.styled';
@@ -12,7 +14,7 @@ import {
 import titleEnum from '../../global/enums/titleEnum';
 import inputTypeEnum from '../../global/enums/inputTypeEnum';
 import buttonColorEnum from '../../global/enums/buttonColorEnum';
-import { getProjectFeatures, getProjectTypes } from '../../utils/fetchAPI';
+import { getProjectFeatures, getProjectTypes, createProject } from '../../utils/fetchAPI';
 
 const FieldEnum = {
   date: 'date',
@@ -23,7 +25,9 @@ const FieldEnum = {
   type: 'type',
 };
 
-const NewProject = () => {
+const NewProject = (authUser) => {
+  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
   const [features, setFeatures] = useState([]);
   const [types, setTypes] = useState([]);
   const [data, setData] = useState({
@@ -32,7 +36,7 @@ const NewProject = () => {
     [FieldEnum.features]: [],
     [FieldEnum.otherFeatures]: '',
     [FieldEnum.title]: '',
-    [FieldEnum.type]: {},
+    [FieldEnum.type]: '',
   });
 
   const handleChangeData = (event, type) => {
@@ -59,10 +63,22 @@ const NewProject = () => {
     fetchData();
   }, []);
 
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
+      const response = await createProject(data, authUser.props.associationId);
+      const { slug } = response.project;
+      navigate(`/projets/${slug}`);
+    } catch (error) {
+      console.error(error);
+      setErrorMessage(error.response.data.error);
+    }
+  };
+
   return (
     <StyledNewProject>
       <StyledTitle content="Nouveau projet" variant={titleEnum.h1} />
-      <StyledForm>
+      <StyledForm onSubmit={handleSubmit}>
         <StyledInput
           onChange={handleChangeData}
           value={data[FieldEnum.title]}
@@ -113,6 +129,7 @@ const NewProject = () => {
           label="Date de mise en ligne souhaitée"
           type={inputTypeEnum.date}
         />
+        {errorMessage && <StyledError>{errorMessage}</StyledError>}
         <StyledButton
           color={buttonColorEnum.primary}
           label="Créer mon projet"
