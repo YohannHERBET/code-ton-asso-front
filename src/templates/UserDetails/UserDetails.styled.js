@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import Card from '../../components/Card/Card';
 import Tag from '../../components/Tag/Tag';
 import Title from '../../components/Title/Title';
@@ -16,7 +16,7 @@ export const StyledUser = styled.section`
 export const StyledInfos = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
   margin: 0 10px;
   @media ${breakpoints.laptop} {
     gap: 60px;
@@ -56,11 +56,12 @@ export const StyledSubTitle = styled(Title)`
 `;
 
 export const StyledDescription = styled.p`
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
   line-height: 1.4rem;
+`;
+
+export const StyledNoProjectDescription = styled.p`
+  line-height: 1.4rem;
+  text-align: center;
 `;
 
 export const StyledBackground = styled.div`
@@ -100,10 +101,10 @@ export const StyledProjects = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ hasProjects }) => (hasProjects ? '10px' : '0')};
-  margin: 0 10px;
-  @media ${breakpoints.laptop} {
+  /* margin: 0 10px; */
+  /* @media ${breakpoints.laptop} {
     margin: 0 100px;
-  }
+  } */
 `;
 
 export const StyledCard = styled(Card)`

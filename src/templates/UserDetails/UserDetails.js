@@ -28,6 +28,7 @@ import {
   StyledContainerLeft,
   StyledContainerRight,
   StyledBlock,
+  StyledNoProjectDescription,
 } from './UserDetails.styled';
 import titleEnum from '../../global/enums/titleEnum';
 import Button from '../../components/Button/Button';
@@ -94,7 +95,7 @@ const UserDetails = (props) => {
   const noProjectContent =
     userType === 'association'
       ? 'Cette association n’a pas encore soumis de projet.'
-      : "Ce développeur n'a pas encore participé à un projet";
+      : "Ce développeur n'a pas encore participé à un projet.";
 
   const categoriesList = user.categories?.map((category) => {
     const { id, label } = category;
@@ -218,17 +219,19 @@ const UserDetails = (props) => {
             </StyledBlock>
           </>
         )}
+
+        <StyledProjects hasProjects={projectsList?.length}>
+          <StyledSubTitle content={buttonContent} variant={titleEnum.h2} />
+
+          {projectsList?.length ? (
+            <StyledCardList>{projectsList}</StyledCardList>
+          ) : (
+            <StyledNoProjectDescription>
+              {noProjectContent}
+            </StyledNoProjectDescription>
+          )}
+        </StyledProjects>
       </StyledInfos>
-
-      <StyledProjects hasProjects={projectsList?.length}>
-        <StyledSubTitle content={buttonContent} variant={titleEnum.h2} />
-
-        {projectsList?.length ? (
-          <StyledCardList>{projectsList}</StyledCardList>
-        ) : (
-          <StyledDescription>{noProjectContent}</StyledDescription>
-        )}
-      </StyledProjects>
     </StyledUser>
   );
 };
