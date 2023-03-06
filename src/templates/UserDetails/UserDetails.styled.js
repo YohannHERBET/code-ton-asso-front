@@ -10,6 +10,7 @@ export const StyledUser = styled.section`
   display: flex;
   flex-direction: column;
   gap: 60px;
+  margin-bottom: 100px;
 `;
 
 export const StyledInfos = styled.div`
