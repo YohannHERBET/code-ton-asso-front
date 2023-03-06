@@ -9,6 +9,7 @@ export const StyledInscriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 26px 0 100px 0;
 `;
 export const StyledTitle = styled(Title)`
   margin: 2rem 0;

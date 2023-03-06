@@ -8,7 +8,8 @@ export const StyledList = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 60px;
+  min-height: 90vh;
+  margin: 60px 0 100px 0;
 `;
 
 export const StyledInfos = styled.div`
