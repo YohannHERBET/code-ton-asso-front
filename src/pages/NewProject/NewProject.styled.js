@@ -12,7 +12,7 @@ export const StyledNewProject = styled.section`
   justify-content: center;
   align-items: center;
   gap: 60px;
-  margin-top: 60px;
+  margin: 60px 0 100px 0;
 `;
 
 export const StyledTitle = styled(Title)``;

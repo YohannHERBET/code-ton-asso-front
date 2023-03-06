@@ -11,6 +11,7 @@ export const StyledInscriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 30px 0 100px 0;
 `;
 
 export const StyledContainerTitle = styled.div`

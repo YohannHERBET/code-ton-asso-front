@@ -8,6 +8,7 @@ export const StyledProject = styled.section`
   display: flex;
   flex-direction: column;
   gap: 60px;
+  margin-bottom: 100px;
 `;
 
 export const StyledInfos = styled.div`
@@ -140,5 +141,10 @@ export const StyledFeaturesList = styled.ul`
 
 export const StyledButtons = styled.div`
   display: flex;
+  align-items: center;
   justify-content: center;
+  flex-direction: column;
+  @media ${breakpoints.tablet} {
+    flex-direction: row;
+  }
 `;

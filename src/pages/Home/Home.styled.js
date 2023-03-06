@@ -11,6 +11,7 @@ export const StyledHome = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 90vh;
   margin-top: 60px;
 `;
 
