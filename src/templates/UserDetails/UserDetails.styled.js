@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import Card from '../../components/Card/Card';
 import Tag from '../../components/Tag/Tag';
-
 import Title from '../../components/Title/Title';
+import { ReactComponent as TeamIcon } from '../../assets/team.svg';
+import { ReactComponent as UserIcon } from '../../assets/user.svg';
 import breakpoints from '../../global/breakpoints';
 
 export const StyledUser = styled.section`
@@ -14,9 +15,10 @@ export const StyledUser = styled.section`
 export const StyledInfos = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
   margin: 0 10px;
   @media ${breakpoints.laptop} {
+    gap: 60px;
     margin: 0 100px;
   }
 `;
@@ -78,7 +80,7 @@ export const StyledTagContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-top: 10px;
   @media ${breakpoints.mobileM} {
     margin-right: 10px;
   }
@@ -88,7 +90,6 @@ export const StyledTagContainer = styled.div`
 `;
 
 export const StyledTag = styled(Tag)`
-  margin-bottom: 10px;
   @media ${breakpoints.mobileM} {
     margin-right: 10px;
   }
@@ -124,8 +125,41 @@ export const StyledCardList = styled.div`
 export const StyledButtons = styled.div`
   display: flex;
   justify-content: center;
+  @media ${breakpoints.tablet} {
+    margin-left: 50px;
+  }
 `;
 
 export const StyledWorkPref = styled.div`
   display: flex;
+  justify-content: center;
+  @media ${breakpoints.tablet} {
+    justify-content: left;
+  }
 `;
+
+export const StyledTeamIcon = styled(TeamIcon)``;
+
+export const StyledUserIcon = styled(UserIcon)``;
+
+export const StyledMainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  @media ${breakpoints.tablet} {
+    flex-direction: row;
+  }
+`;
+
+export const StyledUserContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+`;
+
+export const StyledContainerLeft = styled.div``;
+
+export const StyledContainerRight = styled.div``;
+
+export const StyledBlock = styled.div``;
