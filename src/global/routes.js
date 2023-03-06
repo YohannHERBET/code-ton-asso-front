@@ -9,6 +9,7 @@ import List from '../templates/List/List';
 import cardTypeEnum from './enums/cardTypeEnum';
 import NewProject from '../pages/NewProject/NewProject';
 import Project from '../templates/Project/Project';
+import UserDetails from '../templates/UserDetails/UserDetails';
 
 const routes = [
   {
@@ -87,6 +88,20 @@ const routes = [
     path: 'projets/:slug',
     element: <Project type={cardTypeEnum.project} />,
     title: 'Projet',
+  },
+  {
+    path: 'associations/:slug',
+    element: (
+      <UserDetails userType="association" cardType={cardTypeEnum.project} />
+    ),
+    title: 'association',
+  },
+  {
+    path: 'developpeurs/:slug',
+    element: (
+      <UserDetails userType="developer" cardType={cardTypeEnum.project} />
+    ),
+    title: 'développeur',
   },
 ];
 

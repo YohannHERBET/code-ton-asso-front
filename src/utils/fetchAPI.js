@@ -77,6 +77,20 @@ export const getProjectFeatures = async () => {
   return features.data;
 };
 
+export const getAssociation = async (slug) => {
+  const association = await axios.get(
+    `${process.env.REACT_APP_API_URL}associations/${slug}`
+  );
+  return association.data;
+};
+
+export const getDeveloper = async (slug) => {
+  const developer = await axios.get(
+    `${process.env.REACT_APP_API_URL}developers/${slug}`
+  );
+  return developer.data;
+};
+
 export const joinProject = async ({ developerId, projectId, token }) => {
   const response = await axios.post(
     `${process.env.REACT_APP_API_URL}projects/join`,
