@@ -76,3 +76,45 @@ export const getProjectFeatures = async () => {
   const features = await axios.get(`${process.env.REACT_APP_API_URL}features`);
   return features.data;
 };
+
+export const joinProject = async ({ developerId, projectId, token }) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_API_URL}projects/join`,
+    {
+      developerId,
+      projectId,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data;
+};
+
+export const quitProject = async ({ developerId, projectId, token }) => {
+  const response = await axios.delete(
+    `${process.env.REACT_APP_API_URL}projects/quit`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: { developerId, projectId },
+    }
+  );
+  return response.data;
+};
+
+export const updateProject = async ({ projectId, payload, token }) => {
+  const response = await axios.put(
+    `${process.env.REACT_APP_API_URL}projects/${projectId}`,
+    payload,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data;
+};

@@ -120,6 +120,7 @@ export const StyledDevelopers = styled.div`
 export const StyledCard = styled(Card)`
   flex: 1;
   width: 100%;
+  min-height: 341px;
 `;
 
 export const StyledCardList = styled.div`

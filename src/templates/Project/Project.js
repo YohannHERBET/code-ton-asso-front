@@ -1,8 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
-import { getProject } from '../../utils/fetchAPI';
+import {
+  getProject,
+  joinProject,
+  quitProject,
+  updateProject,
+} from '../../utils/fetchAPI';
 
 import cardTypeEnum from '../../global/enums/cardTypeEnum';
 import cardTypeMatcher from '../../global/enums/cardTypeMatcher';
@@ -30,6 +36,10 @@ import titleEnum from '../../global/enums/titleEnum';
 import { getFormatedDate } from '../../utils/formatDate';
 import Button from '../../components/Button/Button';
 import buttonEnum from '../../global/enums/buttonEnum';
+import { getUserType } from '../../utils/getUserType';
+import { UserContext } from '../../context/userContext';
+import { userTypeEnum } from '../../global/enums/userTypeEnum';
+import buttonColorEnum from '../../global/enums/buttonColorEnum';
 
 const Project = (props) => {
   const { type = cardTypeEnum.project } = props;
@@ -46,30 +56,57 @@ const Project = (props) => {
   const [isMyProject, setIsMyProject] = useState(false);
   const { slug } = useParams();
 
+  const { authUser } = useContext(UserContext);
+  const userType = getUserType(authUser);
+
   const contactAssociation = () => {
     window.location.href = `mailto:${project.email}`;
   };
 
+  useEffect(() => {
+    if (
+      userType === userTypeEnum.association &&
+      authUser?.id === project.userAssociationId
+    ) {
+      setIsMyProject(true);
+    } else if (
+      userType === userTypeEnum.developer &&
+      project.developers?.find(
+        (developer) => developer?.user.id === authUser?.id
+      )
+    ) {
+      setIsMyProject(true);
+    } else {
+      setIsMyProject(false);
+    }
+  }, [project]);
+
   const getProjectDetails = async () => {
     const currentProject = await getProject(slug);
     const {
+      id: projectId,
       title,
       description,
       Features,
       Developers,
       other_features: otherFeatures,
       release_date: releaseDate,
+      visible,
     } = currentProject;
     const { association_name: associationName } = currentProject.association;
-    const { firstname, lastname, email } = currentProject.association.user;
+    const {
+      firstname,
+      lastname,
+      email,
+      id: userAssociationId,
+    } = currentProject.association.user;
     const { label: projectType } = currentProject.type;
 
-    // TODO:
-    setIsMyProject(false);
-
     setProject({
+      id: projectId,
       name: `${firstname} ${lastname}`,
       associationName: associationName,
+      userAssociationId,
       title: title,
       description,
       type: projectType,
@@ -78,12 +115,95 @@ const Project = (props) => {
       otherFeatures,
       releaseDate,
       email,
+      visible,
     });
   };
 
   useEffect(() => {
     getProjectDetails();
   }, []);
+
+  const toggleVisibleProject = async () => {
+    const token = Cookies.get('token');
+    try {
+      const payload = {
+        visible: !project.visible,
+      };
+      await updateProject({
+        projectId: project.id,
+        payload,
+        token,
+      });
+      await getProjectDetails();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleJoinProject = async () => {
+    try {
+      const token = Cookies.get('token');
+      await joinProject({
+        developerId: authUser?.developerId,
+        projectId: project.id,
+        token,
+      });
+      await getProjectDetails(slug);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleQuitProject = async () => {
+    try {
+      const token = Cookies.get('token');
+      await quitProject({
+        developerId: authUser?.developerId,
+        projectId: project.id,
+        token,
+      });
+      await getProjectDetails(slug);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getButtons = () => {
+    if (userType === userTypeEnum.association) {
+      if (isMyProject) {
+        return project.visible ? (
+          <Button label="Masquer mon projet" onClick={toggleVisibleProject} />
+        ) : (
+          <Button
+            label="Rendre visible mon projet"
+            onClick={toggleVisibleProject}
+          />
+        );
+      }
+      return null;
+    }
+    if (userType === userTypeEnum.developer) {
+      return (
+        <>
+          {isMyProject ? (
+            <Button
+              label="Annuler ma participation"
+              color={buttonColorEnum.tertiary}
+              onClick={handleQuitProject}
+            />
+          ) : (
+            <Button label="Participer au projet" onClick={handleJoinProject} />
+          )}
+          <Button
+            label="Contacter l'association"
+            variant={buttonEnum.outline}
+            onClick={contactAssociation}
+          />
+        </>
+      );
+    }
+    return null;
+  };
 
   const StyledIcon = cardTypeMatcher[type];
 
@@ -105,6 +225,8 @@ const Project = (props) => {
       />
     );
   });
+
+  const buttons = getButtons();
 
   return (
     <StyledProject>
@@ -165,20 +287,7 @@ const Project = (props) => {
           </StyledDescription>
         )}
       </StyledDevelopers>
-      <StyledButtons>
-        {isMyProject ? (
-          <Button label="Masquer mon projet" />
-        ) : (
-          <>
-            <Button label="Participer au projet" />
-            <Button
-              label="Contacter l'association"
-              variant={buttonEnum.outline}
-              onClick={contactAssociation}
-            />
-          </>
-        )}
-      </StyledButtons>
+      {buttons && <StyledButtons>{buttons}</StyledButtons>}
     </StyledProject>
   );
 };
