@@ -7,9 +7,10 @@ export const createUserAndDeveloper = async (formValues) => {
     email: formValues.email,
     password: formValues.password,
     description: formValues.description,
-    slug: formValues.name.replace(/\s/g, '-').toLowerCase(),
+    slug: `${formValues.firstname.replace(/\s/g, '-').toLowerCase()}-${formValues.name.replace(/\s/g, '-').toLowerCase()}`,
     type: formValues.type.value,
     level: formValues.level.value,
+    skills: formValues.skills.map((skill) => skill.id),
     work_preferences: formValues.workPreferences.value,
   });
 };
@@ -21,9 +22,10 @@ export const createUserAndAssociation = async (formValues) => {
     email: formValues.email,
     password: formValues.password,
     description: formValues.description,
+    categories: formValues.categories.map((category) => category.id),
     rna: formValues.rna,
     association_name: formValues.associationName,
-    slug: formValues.name.replace(/\s/g, '-').toLowerCase(),
+    slug: formValues.associationName.replace(/\s/g, '-').toLowerCase(),
   });
 };
 
