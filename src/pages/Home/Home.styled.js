@@ -9,7 +9,6 @@ import breakpoints from '../../global/breakpoints';
 export const StyledHome = styled.main`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   min-height: 90vh;
   margin-top: 60px;

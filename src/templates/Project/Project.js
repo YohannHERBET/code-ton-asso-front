@@ -26,6 +26,7 @@ import {
   StyledImage,
   StyledInfos,
   StyledLeftContainer,
+  StyledLoader,
   StyledName,
   StyledProject,
   StyledRightContainer,
@@ -54,6 +55,7 @@ const Project = (props) => {
     releaseDate: '',
   });
   const [isMyProject, setIsMyProject] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { slug } = useParams();
 
   const { authUser } = useContext(UserContext);
@@ -82,6 +84,7 @@ const Project = (props) => {
   }, [project]);
 
   const getProjectDetails = async () => {
+    setLoading(true);
     const currentProject = await getProject(slug);
     const {
       id: projectId,
@@ -117,6 +120,7 @@ const Project = (props) => {
       email,
       visible,
     });
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -237,14 +241,17 @@ const Project = (props) => {
           <StyledIcon />
         </StyledBackground>
       )}
+      <StyledLoader loading={loading} />
       <StyledInfos>
         <StyledLeftContainer>
           <StyledName>{project.name}</StyledName>
           <StyledTitle content={project.title} variant={titleEnum.h1} />
-          <StyledAssociationName
-            content={`${project.associationName} - ${project.type}`}
-            variant={titleEnum.h2}
-          />
+          {project.associationName && project.type && (
+            <StyledAssociationName
+              content={`${project.associationName} - ${project.type}`}
+              variant={titleEnum.h2}
+            />
+          )}
           <StyledDescription>{project.description}</StyledDescription>
         </StyledLeftContainer>
         <StyledRightContainer>
@@ -260,7 +267,7 @@ const Project = (props) => {
           {project.otherFeatures && (
             <StyledBlock>
               <StyledSubTitle
-                content="Autres Fonctionnalités"
+                content="Autres fonctionnalités"
                 variant={titleEnum.h2}
               />
               <StyledDescription>{project.otherFeatures}</StyledDescription>
@@ -278,12 +285,15 @@ const Project = (props) => {
         </StyledRightContainer>
       </StyledInfos>
       <StyledDevelopers hasDevelopers={developersList?.length}>
-        <StyledSubTitle content="Les participants" variant={titleEnum.h2} />
-        {developersList?.length ? (
+        {!loading && (
+          <StyledSubTitle content="Les participants" variant={titleEnum.h2} />
+        )}
+        {developersList?.length >= 1 && (
           <StyledCardList>{developersList}</StyledCardList>
-        ) : (
+        )}
+        {!loading && !developersList?.length >= 1 && (
           <StyledDescription>
-            Pas encore de participants pour ce projet, lance-toi!
+            Pas encore de participants pour ce projet, lance-toi !
           </StyledDescription>
         )}
       </StyledDevelopers>

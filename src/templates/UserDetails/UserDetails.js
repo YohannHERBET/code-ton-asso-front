@@ -29,6 +29,7 @@ import {
   StyledContainerRight,
   StyledBlock,
   StyledNoProjectDescription,
+  StyledLoader,
 } from './UserDetails.styled';
 import titleEnum from '../../global/enums/titleEnum';
 import Button from '../../components/Button/Button';
@@ -53,8 +54,10 @@ const UserDetails = (props) => {
     level: '',
     workPreferences: '',
   });
+  const [loading, setLoading] = useState(true);
 
   async function getUserDetails() {
+    setLoading(true);
     const currentUser =
       userType === 'association'
         ? await getAssociation(slug)
@@ -85,6 +88,7 @@ const UserDetails = (props) => {
       level: level || '',
       workPreferences: workPreferences || '',
     });
+    setLoading(false);
   }
 
   const buttonContent =
@@ -160,6 +164,7 @@ const UserDetails = (props) => {
           <StyledIcon />
         </StyledBackground>
       )}
+      <StyledLoader loading={loading} />
       <StyledInfos>
         <StyledMainContainer>
           <StyledContainerLeft>
@@ -184,13 +189,14 @@ const UserDetails = (props) => {
 
           <StyledContainerRight>
             <StyledButtons>
-              {user.id === authUser?.id ? (
+              {!loading && user.id === authUser?.id && (
                 <Button
                   label="Supprimer mon compte"
                   onClick={deleteAccount}
                   color={buttonColorEnum.tertiary}
                 />
-              ) : (
+              )}
+              {!loading && user.id !== authUser?.id && (
                 <Button label="Contactez-moi" onClick={contactUser} />
               )}
             </StyledButtons>
