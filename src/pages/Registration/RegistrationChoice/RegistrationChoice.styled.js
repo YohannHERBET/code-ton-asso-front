@@ -7,6 +7,7 @@ export const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 10px 0 100px 0;
 `;
 
 export const StyledContainerCards = styled.div`

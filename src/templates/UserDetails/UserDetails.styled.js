@@ -1,10 +1,12 @@
 import styled from 'styled-components/macro';
-
 import Card from '../../components/Card/Card';
+import Tag from '../../components/Tag/Tag';
 import Title from '../../components/Title/Title';
+import { ReactComponent as TeamIcon } from '../../assets/team.svg';
+import { ReactComponent as UserIcon } from '../../assets/user.svg';
 import breakpoints from '../../global/breakpoints';
 
-export const StyledProject = styled.section`
+export const StyledUser = styled.section`
   display: flex;
   flex-direction: column;
   gap: 60px;
@@ -14,30 +16,12 @@ export const StyledProject = styled.section`
 export const StyledInfos = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 30px;
   margin: 0 10px;
   @media ${breakpoints.laptop} {
-    flex-direction: row;
-    gap: 100px;
+    gap: 60px;
     margin: 0 100px;
   }
-  @media ${breakpoints.tablet} {
-    flex-direction: row;
-  }
-`;
-
-export const StyledLeftContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 2;
-  gap: 10px;
-`;
-
-export const StyledRightContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  gap: 40px;
 `;
 
 export const StyledName = styled.p`
@@ -60,30 +44,24 @@ export const StyledTitle = styled(Title)`
   }
 `;
 
-export const StyledAssociationName = styled(Title)`
+export const StyledSubTitle = styled(Title)`
   font-size: ${({ theme }) => theme.fontSize.pM};
   font-weight: ${({ theme }) => theme.fontWeight.medium};
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   text-align: center;
   @media ${breakpoints.tablet} {
-    margin-bottom: 10px;
     text-align: left;
     font-size: ${({ theme }) => theme.fontSize.pL};
   }
 `;
 
-export const StyledSubTitle = styled(Title)`
-  font-size: ${({ theme }) => theme.fontSize.pM};
-  font-weight: ${({ theme }) => theme.fontWeight.semiBold};
-  margin-bottom: 10px;
-  @media ${breakpoints.tablet} {
-    font-size: ${({ theme }) => theme.fontSize.pL};
-    font-weight: ${({ theme }) => theme.fontWeight.medium};
-  }
-`;
-
 export const StyledDescription = styled.p`
   line-height: 1.4rem;
+`;
+
+export const StyledNoProjectDescription = styled.p`
+  line-height: 1.4rem;
+  text-align: center;
 `;
 
 export const StyledBackground = styled.div`
@@ -100,27 +78,34 @@ export const StyledImage = styled.img`
   object-fit: cover;
 `;
 
-export const StyledBlock = styled.div``;
-
-export const StyledFeature = styled.p`
-  display: inline;
-  line-height: 1.4rem;
+export const StyledTagContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+  @media ${breakpoints.mobileM} {
+    margin-right: 10px;
+  }
+  @media ${breakpoints.tablet} {
+    justify-content: left;
+  }
 `;
 
-export const StyledDevelopers = styled.div`
+export const StyledTag = styled(Tag)`
+  @media ${breakpoints.mobileM} {
+    margin-right: 10px;
+  }
+`;
+
+export const StyledProjects = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ hasDevelopers }) => (hasDevelopers ? '10px' : '0')};
-  margin: 0 10px;
-  @media ${breakpoints.laptop} {
-    margin: 0 100px;
-  }
+  gap: ${({ hasProjects }) => (hasProjects ? '10px' : '0')};
 `;
 
 export const StyledCard = styled(Card)`
   flex: 1;
   width: 100%;
-  min-height: 341px;
 `;
 
 export const StyledCardList = styled.div`
@@ -135,17 +120,44 @@ export const StyledCardList = styled.div`
   }
 `;
 
-export const StyledFeaturesList = styled.ul`
-  list-style-position: inside;
-  list-style-type: disc;
-`;
-
 export const StyledButtons = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
+  @media ${breakpoints.tablet} {
+    margin-left: 50px;
+  }
+`;
+
+export const StyledWorkPref = styled.div`
+  display: flex;
+  justify-content: center;
+  @media ${breakpoints.tablet} {
+    justify-content: left;
+  }
+`;
+
+export const StyledTeamIcon = styled(TeamIcon)``;
+
+export const StyledUserIcon = styled(UserIcon)``;
+
+export const StyledMainContainer = styled.div`
+  display: flex;
   flex-direction: column;
+  gap: 10px;
   @media ${breakpoints.tablet} {
     flex-direction: row;
   }
 `;
+
+export const StyledUserContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+`;
+
+export const StyledContainerLeft = styled.div``;
+
+export const StyledContainerRight = styled.div``;
+
+export const StyledBlock = styled.div``;
