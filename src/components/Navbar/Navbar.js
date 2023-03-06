@@ -25,6 +25,7 @@ import {
 } from './Navbar.styled';
 import { UserContext } from '../../context/userContext';
 import cardTypeEnum from '../../global/enums/cardTypeEnum';
+import buttonColorEnum from '../../global/enums/buttonColorEnum';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -118,7 +119,12 @@ const Navbar = () => {
           <StyledImage src={burger} onClick={() => setIsOpen(!isOpen)} />
         )}
         {authUser ? (
-          <StyledButton label="Me déconnecter" onClick={disconnect} />
+          <StyledButton
+            label="Me déconnecter"
+            onClick={disconnect}
+            variant={buttonEnum.fill}
+            color={buttonColorEnum.secondary}
+          />
         ) : (
           <StyledButtonContainer>
             <StyledButton label="Me connecter" to="/connexion" />
