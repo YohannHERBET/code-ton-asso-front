@@ -101,10 +101,6 @@ export const StyledProjects = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ hasProjects }) => (hasProjects ? '10px' : '0')};
-  /* margin: 0 10px; */
-  /* @media ${breakpoints.laptop} {
-    margin: 0 100px;
-  } */
 `;
 
 export const StyledCard = styled(Card)`
