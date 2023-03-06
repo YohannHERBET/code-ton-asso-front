@@ -7,7 +7,7 @@ export const createUserAndDeveloper = async (formValues) => {
     email: formValues.email,
     password: formValues.password,
     description: formValues.description,
-    slug: formValues.name,
+    slug: formValues.name.replace(/\s/g, '-').toLowerCase(),
     type: formValues.type.value,
     level: formValues.level.value,
     work_preferences: formValues.workPreferences.value,
@@ -23,7 +23,7 @@ export const createUserAndAssociation = async (formValues) => {
     description: formValues.description,
     rna: formValues.rna,
     association_name: formValues.associationName,
-    slug: formValues.name,
+    slug: formValues.name.replace(/\s/g, '-').toLowerCase(),
   });
 };
 
@@ -75,4 +75,22 @@ export const getProject = async (slug) => {
 export const getProjectFeatures = async () => {
   const features = await axios.get(`${process.env.REACT_APP_API_URL}features`);
   return features.data;
+};
+
+export const createProject = async (data, associationId) => {
+  const response = await axios.post(`${process.env.REACT_APP_API_URL}projects`, {
+    release_date: data.date,
+    description: data.description,
+    other_features: data.otherFeatures,
+    title: data.title,
+    type_id: data.type.id,
+    features: data.features.map((feature) => feature.id),
+    association_id: associationId,
+    slug: data.title.replace(/\s/g, '-').toLowerCase(),
+  }, {
+    headers: {
+      Authorization: `Bearer ${document.cookie.split('=')[1]}`,
+    }
+  });
+  return response.data;
 };

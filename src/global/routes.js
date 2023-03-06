@@ -1,3 +1,7 @@
+import { Navigate } from 'react-router-dom';
+import { useContext } from 'react';
+import PropTypes from 'prop-types';
+import { UserContext } from '../context/userContext';
 import Home from '../pages/Home/Home';
 import Error404 from '../pages/Error404/Error404';
 import Exemple from '../pages/Exemple/Exemple';
@@ -9,6 +13,18 @@ import List from '../templates/List/List';
 import cardTypeEnum from './enums/cardTypeEnum';
 import NewProject from '../pages/NewProject/NewProject';
 import Project from '../templates/Project/Project';
+
+const ProtectedRouteAsso = ({ Component }) => {
+  const { authUser } = useContext(UserContext);
+  if (authUser && authUser.associationId) {
+    return <Component props={authUser} />;
+  }
+  return <Navigate to="/Error404" />;
+};
+
+ProtectedRouteAsso.propTypes = {
+  Component: PropTypes.elementType,
+};
 
 const routes = [
   {
@@ -51,7 +67,11 @@ const routes = [
   },
   {
     path: 'creer-un-projet',
-    element: <NewProject />,
+    element: (
+      <ProtectedRouteAsso
+        Component={NewProject}
+      />
+    ),
     title: 'créer un projet',
   },
   {
