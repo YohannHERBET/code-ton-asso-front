@@ -14,6 +14,7 @@ import {
 
 import cardTypeEnum from '../../global/enums/cardTypeEnum';
 import titleEnum from '../../global/enums/titleEnum';
+import Loader from '../../components/Loader/Loader';
 
 const PROJECT_SLUG = '/projets';
 const ASSOCIATION_SLUG = '/associations';
@@ -31,8 +32,10 @@ const Home = () => {
     developers: [],
     projects: [],
   });
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
+    setLoading(true);
     try {
       const promises = apiEndpointsEnum.map((apiEndpoint) =>
         axios.get(`${process.env.REACT_APP_API_URL}${apiEndpoint.path}`)
@@ -48,6 +51,7 @@ const Home = () => {
         {}
       );
       setData(newData);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -112,6 +116,8 @@ const Home = () => {
           développeurs
         </StyledSubTitle>
       </StyledInfos>
+
+      <Loader loading={loading} />
 
       {projects?.length >= 1 && (
         <StyledSection>

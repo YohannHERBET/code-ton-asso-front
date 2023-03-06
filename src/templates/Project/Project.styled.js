@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro';
 
 import Card from '../../components/Card/Card';
+import Loader from '../../components/Loader/Loader';
 import Title from '../../components/Title/Title';
 import breakpoints from '../../global/breakpoints';
 
@@ -8,6 +9,7 @@ export const StyledProject = styled.section`
   display: flex;
   flex-direction: column;
   gap: 60px;
+  min-height: 90vh;
   margin-bottom: 100px;
 `;
 
@@ -148,4 +150,11 @@ export const StyledButtons = styled.div`
   @media ${breakpoints.tablet} {
     flex-direction: row;
   }
+`;
+
+export const StyledLoader = styled(Loader)`
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 `;

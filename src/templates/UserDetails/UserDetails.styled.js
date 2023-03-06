@@ -5,6 +5,7 @@ import Title from '../../components/Title/Title';
 import { ReactComponent as TeamIcon } from '../../assets/team.svg';
 import { ReactComponent as UserIcon } from '../../assets/user.svg';
 import breakpoints from '../../global/breakpoints';
+import Loader from '../../components/Loader/Loader';
 
 export const StyledUser = styled.section`
   display: flex;
@@ -164,3 +165,10 @@ export const StyledContainerLeft = styled.div``;
 export const StyledContainerRight = styled.div``;
 
 export const StyledBlock = styled.div``;
+
+export const StyledLoader = styled(Loader)`
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;

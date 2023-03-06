@@ -9,6 +9,7 @@ import {
   StyledCardList,
   StyledInfos,
   StyledList,
+  StyledLoader,
   StyledTitle,
 } from './List.styled';
 import cardTypeEnum from '../../global/enums/cardTypeEnum';
@@ -17,14 +18,17 @@ const List = (props) => {
   const { type, title, apiUrl } = props;
 
   const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   async function fetchData() {
+    setLoading(true);
     const response = await axios.get(apiUrl);
     setList(
       type === cardTypeEnum.project
         ? response.data.filter((project) => project.visible === true)
         : response.data
     );
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -47,8 +51,9 @@ const List = (props) => {
   return (
     <StyledList>
       <StyledInfos>
-        {list.length && <StyledTitle content={title} variant={titleEnum.h1} />}
+        <StyledTitle content={title} variant={titleEnum.h1} />
       </StyledInfos>
+      <StyledLoader loading={loading} />
       {list.length >= 1 && (
         <>
           <StyledCardList list={list} type={type} />
