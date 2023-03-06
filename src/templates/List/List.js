@@ -47,7 +47,7 @@ const List = (props) => {
   return (
     <StyledList>
       <StyledInfos>
-        <StyledTitle content={title} variant={titleEnum.h1} />
+        {list.length && <StyledTitle content={title} variant={titleEnum.h1} />}
       </StyledInfos>
       {list.length >= 1 && (
         <>
