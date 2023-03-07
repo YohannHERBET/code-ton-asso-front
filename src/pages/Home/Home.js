@@ -23,7 +23,7 @@ const DEVELOPER_SLUG = '/developpeurs';
 const apiEndpointsEnum = [
   { name: 'associations', path: 'associations/latest' },
   { name: 'developers', path: 'developers/latest' },
-  { name: 'projects', path: 'projects' },
+  { name: 'projects', path: 'projects/latest' },
 ];
 
 const Home = () => {
