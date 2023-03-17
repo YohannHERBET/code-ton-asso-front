@@ -1,5 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import UserContextProvider from '../../context/userContext';
 
 import theme from '../../global/theme';
 import Layout from '../Layout/Layout';
@@ -8,12 +9,14 @@ import GlobalStyle from '../../global/globalStyles';
 
 const App = () => (
   <ThemeProvider theme={theme}>
-    <BrowserRouter>
-      <GlobalStyle />
-      <Layout>
-        <Router />
-      </Layout>
-    </BrowserRouter>
+    <UserContextProvider>
+      <BrowserRouter>
+        <GlobalStyle />
+        <Layout>
+          <Router />
+        </Layout>
+      </BrowserRouter>
+    </UserContextProvider>
   </ThemeProvider>
 );
 
